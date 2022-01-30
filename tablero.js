@@ -1,7 +1,8 @@
 class Tablero{
-    constructor(escala= 100,dimy =20 ,dimx=10){
+    constructor(escala= 100,dimy =32 ,dimx=30){
         this.escala = escala;
         this.frames = 0;
+        this.dimension = [dimy, dimx];
         this.casillas = this.array2d(dimy,dimx, '#FFFFFF');
         this.estado = 0;
         this.volumen =0.3; 
@@ -11,13 +12,27 @@ class Tablero{
 
     }
 
+    background(color1, color2){
+         let colores= [color1,color2]
+       
+        for(let i = 0; i< this.dimension[0]; i++){
+            for(let m = 0; m < this.dimension[1]; m++){
+                fill(colores[(m+i)%2]);
+                noStroke();
+                rect(this.escala*i, this.escala*m, this.escala);
+            }
+
+            }
+        }
+    
+
     dibujar(){
         //console.log(this.casillas);
         for (let i=0;i<this.casillas.length;i++)
         {
             for(let x=0; x<this.casillas[i].length;x++)
             {
-               
+                
                 fill(this.casillas[i][x])
                 rect((this.escala*x)+this.escala,(this.escala*i)+this.escala,this.escala);
             }

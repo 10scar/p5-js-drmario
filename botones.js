@@ -2,7 +2,7 @@ function botones(){
     
   // jugar boton
   jugar = new Clickable();
-  jugar.image = ininicar;
+  //jugar.image = ininicar;
   jugar.imageScale = 1;
   jugar.text = "";
   jugar.color = "0";
@@ -35,7 +35,7 @@ function botones(){
   
   //
   config = new Clickable();
-  config.image = ajustes;
+  //config.image = ajustes;
   config.imageScale = 1;
   config.text = "";
   config.color = "#ffffff";
@@ -60,7 +60,7 @@ function botones(){
   }
   
   boton_pausa = new Clickable();
-  boton_pausa.image = pausa;
+  //boton_pausa.image = pausa;
   boton_pausa.imageScale = 1;
   boton_pausa.text = "";
   boton_pausa.color = "#ffffff";

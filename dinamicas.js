@@ -91,29 +91,28 @@ function juego(){
 }
 
 function inicio(){
+    //background(250);
+    
+    tablero.background('#045404','#04ac04 ');
+    fill(0);
+    rect(4*tablero.escala, 20*tablero.escala, 25*tablero.escala,7*tablero.escala, 5*tablero.escala);
+    image(mario_esperando,4*tablero.escala,21*tablero.escala,5*tablero.escala,5*tablero.escala);
     //verifica musica
-    intro.setVolume(tablero.volumen);
+/*     intro.setVolume(tablero.volumen);
     if(!intro.isPlaying()){
-      intro.play();
+     intro.play();
       
-    }
+    } */
 
     //dibuja botones e iconos
-    jugar.draw();
+    //jugar.draw();
     //dibuja tutorial
-    image(tutorial_asd,14*tablero.escala,5*tablero.escala,7*tablero.escala,4*tablero.escala);
-    image(tutorial_espacio,13*tablero.escala,10*tablero.escala,9*tablero.escala,5*tablero.escala);
+    /* image(tutorial_asd,14*tablero.escala,5*tablero.escala,7*tablero.escala,4*tablero.escala);
+    image(tutorial_espacio,13*tablero.escala,10*tablero.escala,9*tablero.escala,5*tablero.escala); */
     //informacion del jugador
-    textSize(2*tablero.escala);
-    text(jugador.nombre,13*tablero.escala,1*tablero.escala,100,100);
-    if(frameCount %60 == 0){
-      figura.vida = 0;
-      figura.reiniciar();
-      //figura.escala =tablero.escala*2;
-      figura.x = 4*tablero.escala;
-      figura.y = 14*tablero.escala;
-    }
-
+    /* textSize(2*tablero.escala);
+    text(jugador.nombre,13*tablero.escala,1*tablero.escala,100,100); */
+    
 }
 
 
@@ -126,14 +125,16 @@ function inicio(){
   
   //carga musica e imagenes
   function preload(){
-    img = loadImage('img/texture2.jpg');
+
+    mario_esperando = loadImage('img/mario/esperando.gif');
+ /*    img = loadImage('img/texture2.jpg');
     ininicar = loadImage('img/intro.gif');
     tutorial_asd = loadImage('img/asd.gif');
     tutorial_espacio = loadImage('img/espacio.gif');
     ajustes = loadImage('img/ajustes.png');
     pausa = loadImage('img/pausa.png');
     intro = loadSound('sound/intro.mp3');
-    muscia_juego = loadSound('sound/juego.m4a');
+    muscia_juego = loadSound('sound/juego.m4a'); */
    
   }
   
