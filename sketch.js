@@ -6,8 +6,9 @@ let tamaño = {
   escala:0,
 }
 //varables de imagenes
-let mario_esperando;
-
+let mario_esperando, virus_azul_caminado;
+//variable par ala fuente
+let fuente;
 
 function responsive(tamaño){
   tamaño.width = window.screen.width;

@@ -96,7 +96,14 @@ function inicio(){
     tablero.background('#045404','#04ac04 ');
     fill(0);
     rect(4*tablero.escala, 20*tablero.escala, 25*tablero.escala,7*tablero.escala, 5*tablero.escala);
-    image(mario_esperando,4*tablero.escala,21*tablero.escala,5*tablero.escala,5*tablero.escala);
+
+    image(mario_esperando,4*tablero.escala,21*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+    image(virus_azul_caminado,25*tablero.escala,22*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
+    //texto
+    fill(255);
+    textSize(1*tablero.escala);
+	  textFont(fuente);
+    text('1 PLAYER GAME',11*tablero.escala,21*tablero.escala,20*tablero.escala,2*tablero.escala); 
     //verifica musica
 /*     intro.setVolume(tablero.volumen);
     if(!intro.isPlaying()){
@@ -110,8 +117,8 @@ function inicio(){
     /* image(tutorial_asd,14*tablero.escala,5*tablero.escala,7*tablero.escala,4*tablero.escala);
     image(tutorial_espacio,13*tablero.escala,10*tablero.escala,9*tablero.escala,5*tablero.escala); */
     //informacion del jugador
-    /* textSize(2*tablero.escala);
-    text(jugador.nombre,13*tablero.escala,1*tablero.escala,100,100); */
+    /* textSize(2*tablero.escala);*/
+   
     
 }
 
@@ -125,15 +132,13 @@ function inicio(){
   
   //carga musica e imagenes
   function preload(){
-
+    //carga de animaciones
     mario_esperando = loadImage('img/mario/esperando.gif');
- /*    img = loadImage('img/texture2.jpg');
-    ininicar = loadImage('img/intro.gif');
-    tutorial_asd = loadImage('img/asd.gif');
-    tutorial_espacio = loadImage('img/espacio.gif');
-    ajustes = loadImage('img/ajustes.png');
-    pausa = loadImage('img/pausa.png');
-    intro = loadSound('sound/intro.mp3');
+    virus_azul_caminado = loadImage('img/azul/caminando.gif');
+    //carga de fuente texto;
+    fuente = loadFont('text/PressStart2P.ttf')
+ 
+    /*  
     muscia_juego = loadSound('sound/juego.m4a'); */
    
   }
