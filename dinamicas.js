@@ -106,7 +106,7 @@ function inicio(){
     
     fill(0);
     textSize(2.5*tablero.escala);
-    text('Dr. MARIO',4.8*tablero.escala,9.2*tablero.escala,30*tablero.escala,5*tablero.escala);
+    text('Dr. MARIO',4.8*tablero.escala,9.2*tablero.escala,25*tablero.escala,5*tablero.escala);
     fill(255);
     textSize(2.5*tablero.escala);
     text('Dr. MARIO',5*tablero.escala,9*tablero.escala,25*tablero.escala,5*tablero.escala); 
@@ -118,8 +118,11 @@ function inicio(){
     image(virus_azul_caminado,25*tablero.escala,22*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
     //texto
     fill(255);
-    textSize(1*tablero.escala);
-    text('1 PLAYER GAME',10*tablero.escala,21*tablero.escala,20*tablero.escala,2*tablero.escala); 
+    let time = second();
+    console.log(time);
+    textSize(1*tablero.escala+((time%2)*0.05*tablero.escala));
+    textAlign(CENTER);
+    text('PRESS ENTER',10*tablero.escala,23*tablero.escala,15*tablero.escala,2*tablero.escala); 
     //verifica musica
 /*     intro.setVolume(tablero.volumen);
     if(!intro.isPlaying()){
