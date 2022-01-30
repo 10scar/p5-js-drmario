@@ -11,7 +11,7 @@ const figuras = {
 
 ///en construccion.
 class Ficha{
-    constructor(rotacion =0,escala =100){
+    constructor(rotacion = 0,escala =100){
         this.escala = escala;
         this.rotacion = rotacion;
         this.vida= 1;
@@ -46,7 +46,7 @@ class Ficha{
 
     
     random(obj){
-        let key =Object.values(obj);
+        let key = Object.values(obj);
         let fig = key[Math.floor(Math.random() * key.length)];
         return fig;
     }

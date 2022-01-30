@@ -38,7 +38,7 @@ function setup() {
 }
  
   figura = new Ficha(0,tamaño.escala);
-  tablero = new Tablero(tamaño.escala,32,30);
+  tablero = new Tablero(tamaño.escala);
   botones();
 
 }
