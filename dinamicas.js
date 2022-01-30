@@ -92,8 +92,25 @@ function juego(){
 
 function inicio(){
     //background(250);
-    
+    textFont(fuente);
+
     tablero.background('#045404','#04ac04 ');
+    //dibujar pildora
+    fill('#0474ec');
+    rect(6*tablero.escala, 5*tablero.escala, 10*tablero.escala,10*tablero.escala, 0*tablero.escala);
+    circle(7*tablero.escala, 10*tablero.escala,10*tablero.escala);
+    fill('#e4045c');
+    rect(16*tablero.escala, 5*tablero.escala, 10*tablero.escala,10*tablero.escala, 0*tablero.escala);
+    circle(25*tablero.escala, 10*tablero.escala,10*tablero.escala);
+    
+    
+    fill(0);
+    textSize(2.5*tablero.escala);
+    text('Dr. MARIO',4.8*tablero.escala,9.2*tablero.escala,30*tablero.escala,5*tablero.escala);
+    fill(255);
+    textSize(2.5*tablero.escala);
+    text('Dr. MARIO',5*tablero.escala,9*tablero.escala,25*tablero.escala,5*tablero.escala); 
+
     fill(0);
     rect(4*tablero.escala, 20*tablero.escala, 25*tablero.escala,7*tablero.escala, 5*tablero.escala);
 
@@ -102,8 +119,7 @@ function inicio(){
     //texto
     fill(255);
     textSize(1*tablero.escala);
-	  textFont(fuente);
-    text('1 PLAYER GAME',11*tablero.escala,21*tablero.escala,20*tablero.escala,2*tablero.escala); 
+    text('1 PLAYER GAME',10*tablero.escala,21*tablero.escala,20*tablero.escala,2*tablero.escala); 
     //verifica musica
 /*     intro.setVolume(tablero.volumen);
     if(!intro.isPlaying()){
