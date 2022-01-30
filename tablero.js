@@ -3,6 +3,7 @@ class Tablero {
         this.escala = escala;
         this.frames = 0;
         this.dimension = [dimy, dimx];
+        //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', '#FFFFFF', false]);
         this.estado = 0;
         this.volumen = 0.3;
