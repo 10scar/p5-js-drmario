@@ -95,7 +95,8 @@ function keyPressed() {
         figura.rotar();
         break;
       case RIGHT_ARROW:
-       figura.rotar();
+        figura.rotar();
+        print(figura.rotar());
         break;
     //solo para debug
 /*       case 87:

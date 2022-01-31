@@ -47,7 +47,7 @@ function draw() {
   clear();
 
   //figura.forma = figuras.o
- 
+  
   //tablero.dibujar();
   //figura.dibujar();
   //background(fondo);

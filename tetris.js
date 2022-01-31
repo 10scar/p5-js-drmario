@@ -1,4 +1,4 @@
-const colors = ['#11B6CA','#CA1178','#DA522E'];
+/*const colors = ['#11B6CA','#CA1178','#DA522E'];
 const figuras = {
     l: [3840,8738,240,17476,4],
     j: [312,210,57,150,3],
@@ -7,33 +7,57 @@ const figuras = {
     t: [184,154,58,178,3],
     z: [408,90,51,180,3],
 
+};*/
+
+const colores = {
+    rojo: '#FF0000',
+    azul: '#0000ff',
+    amarillo: '#ffff00',
 };
 
 ///en construccion.
 class Ficha{
+
     constructor(rotacion = 0,escala =100){
         this.escala = escala;
         this.rotacion = rotacion;
         this.vida= 1;
-        this.x = 4*this.escala;
-        this.y=0*this.escala;
+        this.x = 8*this.escala;
+        this.y= 0*this.escala;
+        //this.color1 = '#ffff00';
+        //this.color2 = '#0000ff';
         
     }
 
-    get color(){
-        this._color = this._color == undefined ? this.random(colors): this._color
-        return this._color;
+    get color1(){
+        this._color1 = this._color1 == undefined ? this.random(colores): this._color1
+        return this._color1;
     }
-    set color(color){ 
-        this._color = color;
+    set color1(color){ 
+        this._color1 = color;
     }
 
-    get forma(){
-        this._forma = this._forma == undefined? this.random(figuras): this._forma;
-        return this._forma;
+    get color2(){
+        this._color2 = this._color2 == undefined ? this.random(colores): this._color2
+        return this._color2;
+    }
+    set color2(color){ 
+        this._color2 = color;
+    }
+
+    forma = [
+        [[this.color1, this.color2]],
+        [[this.color1],[this.color2]],
+        [[this.color2, this.color1]],
+        [[this.color2],[this.color1]]
+    ];
+
+    /*get forma(){
+        this.formaa = this.formaa == undefined? this.random(figuras): this.formaa;
+        return this.formaa;
         
     }
-    set forma(forma){ return this._forma = forma}
+    set forma(forma){ return this.formaa = forma}*/
 
     get rotacion(){
         this._rotacion = this._rotacion == undefined? 0:this._rotacion;
@@ -51,7 +75,20 @@ class Ficha{
         return fig;
     }
 
-    mover(x,y =0){
+    dibujar() {
+        //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado
+        //y lo llena del color correspondiente
+        for (let i = 0; i < this.forma[this.rotacion].length; i++) {
+            for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
+                if(this.forma[this.rotacion][i][j] != undefined){
+                    fill(this.forma[this.rotacion][i][j]);
+                square(j * this.escala + this.x, i * this.escala + this.y, this.escala);
+                }
+            }
+        }
+    }
+
+   /* mover(x,y =0){
         if(tablero.estado !=1){
             return false;
         }
@@ -72,66 +109,21 @@ class Ficha{
         this.vida= 1;
         this.x = 4*this.escala;
         this.y=0*this.escala; 
-    }
-        
-
-    }
-
-    dibujar(){
-        let fig = this.forma[this.rotacion];
-        let cua = this.forma[4]
-        let bin = fig.toString(2);
-        bin = '0'.repeat((cua*cua)-bin.length)+ bin;
-        let escala=this.escala;
-        let x1 = this.x;
-        let y1 = this.y;
-        let v = 0;
-        for(let i=0;i< cua*cua;i++){
-
-
-            let mask = '0'.repeat(i)+'1'+'0'.repeat((cua*cua-1)-i);
-         
-            
-            if ((parseInt(mask,2)&fig) !=0){
-                fill(this.color);
-                rect(x1,y1,escala);
-                v=v+1;
-
-            
-                beginShape();
-                vertex(x1+(escala/10), y1+(escala/10));
-                vertex(x1+(escala/10),y1+escala-(escala/15));
-                vertex(x1+escala-(escala/15),y1+(escala/10));
-                vertex(x1+(escala/10), y1+(escala/10));
-                endShape();
-
-                beginShape();
-                vertex(x1+escala-(escala/10), y1+escala-(escala/10));
-                vertex(x1+escala-(escala/10),y1+(escala/15));
-                vertex(x1+(escala/15),y1+escala-(escala/10));
-                vertex(x1+escala-(escala/10), y1+escala-(escala/10));
-                endShape();
-               
-            }
-
-            x1=x1+escala;
-            if(((i+1)%cua) == 0){
-            y1=y1+escala;
-            x1=this.x;  
-            }
-            
-        }
-     
-    }
-
+    }*/
 
     rotar(){
-        if(tablero.estado !=1){
+        /*if(tablero.estado !=1){
             return false;
-        }
+        }*/
+        //this.rotacion += 1;
+
+      /*if (this.rotacion == this.forma.length) {
+        this.rotacion = 0;
+      }*/
         this.rotacion = (++this.rotacion)%4;
         if(!tablero.verificar_colisiones()){
             this.rotacion = (this.rotacion-1)%4;
+            print(this.rotacion);
             if(this.rotacion<0){
                 this.rotacion = 3;
             }
