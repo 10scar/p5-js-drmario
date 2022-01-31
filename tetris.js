@@ -18,14 +18,14 @@ const colores = {
 ///en construccion.
 class Ficha{
 
-    constructor(rotacion = 0,escala =100){
+    constructor(rotacion = 1,escala =100){
         this.escala = escala;
         this.rotacion = rotacion;
         this.vida= 1;
-        this.x = 8*this.escala;
+        this.relposX = 8;
+        this.relposY = 0;
+        this.x = this.relposX*this.escala;
         this.y= 0*this.escala;
-        //this.color1 = '#ffff00';
-        //this.color2 = '#0000ff';
         
     }
 
@@ -88,6 +88,40 @@ class Ficha{
         }
     }
 
+    tryrotate() {
+        //chequea si la siguiente rotación de la figura genera colisiones en cualquier dirección
+        let nextrotation = this.rotacion + 1;
+        if (nextrotation == this.forma.length) {
+          nextrotation = 0;
+        }
+    
+        for (let i = 0; i < this.forma[nextrotation].length; i++) {
+          for (let j = this.forma[nextrotation][i].length - 1; j >= 0; j--) {
+            if (this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i + 1][this.relposX + j + 1][0] != 'blank') {
+              return false;
+            }
+          }
+        }
+    
+        for (let i = 0; i < this.forma[nextrotation].length; i++) {
+          for (let j = 0; j < this.forma[nextrotation][i].length; j++) {
+            if (this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i + 1][this.relposX + j + 1][0] != 'blank') {
+              return false;
+            }
+          }
+        }
+    
+        for (let i = this.forma[nextrotation].length - 1; i >= 0; i--) {
+          for (let j = 0; j < this.forma[nextrotation][i].length; j++) {
+            if (this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i + 1][this.relposX + j + 1][0] != 'blank') {
+              return false;
+            }
+          }
+        }
+
+        return true;
+      }
+
    /* mover(x,y =0){
         if(tablero.estado !=1){
             return false;
@@ -104,7 +138,7 @@ class Ficha{
  
     reiniciar(){
     if(this.vida == 0){
-        this.color = this.random(colors);
+        this.color1 = this.random(colors);
         this.forma = this.random(figuras);
         this.vida= 1;
         this.x = 4*this.escala;
@@ -115,19 +149,12 @@ class Ficha{
         /*if(tablero.estado !=1){
             return false;
         }*/
-        //this.rotacion += 1;
-
-      /*if (this.rotacion == this.forma.length) {
-        this.rotacion = 0;
-      }*/
-        this.rotacion = (++this.rotacion)%4;
-        if(!tablero.verificar_colisiones()){
-            this.rotacion = (this.rotacion-1)%4;
-            print(this.rotacion);
-            if(this.rotacion<0){
-                this.rotacion = 3;
+        if (this.tryrotate()) {
+            this.rotacion += 1;
+            if (this.rotacion == this.forma.length) {
+              this.rotacion = 0;
             }
-        }
+          }
         return this.rotacion;
     }
 

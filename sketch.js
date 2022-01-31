@@ -36,9 +36,10 @@ function setup() {
     cnv.position(x, y);
   
 }
- 
-  figura = new Ficha(0,tamaño.escala);
+
   tablero = new Tablero(tamaño.escala);
+  figura = new Ficha(0,tamaño.escala);
+
   botones();
 
 }
@@ -48,12 +49,12 @@ function draw() {
 
   //figura.forma = figuras.o
   
-  //tablero.dibujar();
-  //figura.dibujar();
+  tablero.dibujar();
+  figura.dibujar();
   //background(fondo);
   //tablero.dibujar_marco();
   //dinamicas
-  dinamicas();
+  //dinamicas();
   
   
   
