@@ -1,10 +1,11 @@
 class Tablero {
-    constructor(escala = 100, dimy = 32, dimx = 16) {
+    constructor(escala = 100, dimy = 16, dimx = 8) {
         this.escala = escala;
         this.frames = 0;
         this.dimension = [dimy, dimx];
         //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', '#FFFFFF', false]);
+        this.casillas[4][5] = ['prueba', '#0000ff', false];
         this.estado = 0;
         this.volumen = 0.3;
         this.nivel = 1;
