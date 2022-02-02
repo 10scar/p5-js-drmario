@@ -22,8 +22,8 @@ class Ficha {
     this.escala = escala;
     this.rotacion = rotacion;
     this.vida = 1;
-    this.relposX = 13;
-    this.relposY = 13;
+    this.relposX = 16;
+    this.relposY = 10;
     this.x = this.relposX * this.escala;
     this.y = this.relposY * this.escala;
 
@@ -82,7 +82,7 @@ class Ficha {
       for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
         if (this.forma[this.rotacion][i][j] != 'blank') {
           fill(this.forma[this.rotacion][i][j]);
-          square(j * this.escala + this.x + 1, i * this.escala + this.y, this.escala);
+          square(j * this.escala + this.x, i * this.escala + this.y, this.escala);
         }
       }
     }
@@ -95,13 +95,13 @@ class Ficha {
       nextrotation = 0;
     }
 
-    if ((this.relposX == tablero.casillas[0].length) | (this.relposY == tablero.casillas.length)) {
+    if ((this.relposX - tablero.posicion[0] + 1 == tablero.casillas[0].length) | (this.relposY - tablero.posicion[1] + 1 == tablero.casillas.length)) {
       return false;
     }
 
     for (let i = 0; i < this.forma[nextrotation].length; i++) {
       for (let j = this.forma[nextrotation][i].length - 1; j >= 0; j--) {
-        if (this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + j - 1][0] != 'blank') {
+        if (this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank') {
           return false;
         }
       }
@@ -109,7 +109,7 @@ class Ficha {
 
     for (let i = 0; i < this.forma[nextrotation].length; i++) {
       for (let j = 0; j < this.forma[nextrotation][i].length; j++) {
-        if ((this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + j - 1][0] != 'blank')) {
+        if ((this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank')) {
           return false;
         }
       }
@@ -117,7 +117,7 @@ class Ficha {
 
     for (let i = this.forma[nextrotation].length - 1; i >= 0; i--) {
       for (let j = 0; j < this.forma[nextrotation][i].length; j++) {
-        if ((this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + j - 1][0] != 'blank')) {
+        if ((this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank')) {
           return false;
         }
       }
@@ -133,9 +133,9 @@ class Ficha {
         //chequea si hay elementos en el tablero que generen colisión a la izquierda
         for (let i = 0; i < this.forma[this.rotacion].length; i++) {
           for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
-            if((this.relposX - 1 == 0)){
+            if((this.relposX - tablero.posicion[0] == 0)){
               return false;
-            } else if ((this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + x - 1][0] != 'blank')) {
+            } else if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + x - tablero.posicion[0]][0] != 'blank') {
               return false;
             }
           }
@@ -143,10 +143,10 @@ class Ficha {
       } else if (x == 1){
         for (let i = 0; i < this.forma[this.rotacion].length; i++) {
           for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
-            if(this.relposX + j == tablero.casillas[0].length){
+            if(this.relposX - tablero.posicion[0] + j + 1 == tablero.casillas[0].length){
               return false;
             }
-            if ((this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + j][0] != 'blank') | (this.relposX + j >= tablero.casillas[0].length)) {
+            if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[(this.relposY - tablero.posicion[1]) + i][this.relposX - tablero.posicion[0] + j + 1][0] != 'blank') {
               return false;
             }
           }
@@ -155,10 +155,10 @@ class Ficha {
     } else {
       for (let i = this.forma[this.rotacion].length - 1; i >= 0; i--) {
         for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
-          if(this.relposY + i == tablero.casillas.length){
+          if((this.relposY - tablero.posicion[1]) + i + 1 == tablero.casillas.length){
             return false;
           }
-          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i][this.relposX + j - 1][0] != 'blank') {
+          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY- tablero.posicion[1] + i + 1][this.relposX + j - tablero.posicion[0]][0] != 'blank') {
             return false;
           }
         }
