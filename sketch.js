@@ -7,7 +7,7 @@ let tamaño = {
 }
 //varables de imagenes
 let mario_esperando, virus_azul_caminado;
-//variable par ala fuente
+//variable para la fuente
 let fuente;
 
 function responsive(tamaño){
@@ -49,12 +49,12 @@ function draw() {
 
   //figura.forma = figuras.o
   
-  tablero.dibujar();
-  figura.dibujar();
+  //tablero.dibujar();
+  //figura.dibujar();
   //background(fondo);
   //tablero.dibujar_marco();
   //dinamicas
-  //dinamicas();
+  dinamicas();
   
   
   

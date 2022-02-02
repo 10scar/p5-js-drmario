@@ -22,8 +22,8 @@ class Ficha {
     this.escala = escala;
     this.rotacion = rotacion;
     this.vida = 1;
-    this.relposX = 4;
-    this.relposY = 0;
+    this.relposX = 13;
+    this.relposY = 13;
     this.x = this.relposX * this.escala;
     this.y = this.relposY * this.escala;
 

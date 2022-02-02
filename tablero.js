@@ -1,12 +1,13 @@
 class Tablero {
-    constructor(escala = 100, dimy = 16, dimx = 8) {
+    constructor(escala = 100, dimy = 16, dimx = 8,posx = 13, posy =10) {
         this.escala = escala;
         this.frames = 0;
-        this.dimension = [dimy, dimx];
+        this.background = [32, 30];
+        this.posicion = [posx,posy];
         //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', '#FFFFFF', false]);
         this.casillas[4][5] = ['prueba', '#0000ff', false];
-        this.estado = 0;
+        this.estado = 1;
         this.volumen = 0.3;
         this.nivel = 1;
         this.lineas = 0;
@@ -14,11 +15,11 @@ class Tablero {
 
     }
 
-    background(color1, color2) {
+    background_draw(color1, color2) {
         let colores = [color1, color2]
 
-        for (let i = 0; i < this.dimension[0]; i++) {
-            for (let m = 0; m < this.dimension[1]; m++) {
+        for (let i = 0; i < this.background[0]; i++) {
+            for (let m = 0; m < this.background[1]; m++) {
                 fill(colores[(m + i) % 2]);
                 noStroke();
                 rect(this.escala * i, this.escala * m, this.escala);
@@ -34,7 +35,7 @@ class Tablero {
             for (let x = 0; x < this.casillas[i].length; x++) {
 
                 fill(this.casillas[i][x][1])
-                rect((this.escala * x) + this.escala, (this.escala * i) + this.escala, this.escala);
+                rect((this.escala *x) + this.escala*this.posicion[0], (this.escala * i) + this.escala*this.posicion[1], this.escala);
             }
         }
 

@@ -51,14 +51,20 @@ function espera(){
 }
 function juego(){
       //verifica musica
-      muscia_juego.setVolume(tablero.volumen);
+ /*      muscia_juego.setVolume(tablero.volumen);
       if(!muscia_juego.isPlaying()){
         muscia_juego.play();
         
-      }
-   tablero.informacion();
-    boton_pausa.draw();
-    if(tablero.nivel>=10){
+      } */
+   //tablero.informacion();
+    //boton_pausa.draw();
+
+    tablero.background_draw('#44049c','#040404')
+    tablero.dibujar();
+    figura.dibujar();
+    
+
+    /* if(tablero.nivel>=10){
       resta = 59;
     }else{
       resta = tablero.nivel*6;
@@ -86,15 +92,17 @@ function juego(){
             tablero.verificar_lineas();
         }
         
-    }
+    } */
     tablero.frames++;
 }
 
 function inicio(){
-    //background(250);
+    let time = second();
+    
     textFont(fuente);
 
-    tablero.background('#045404','#04ac04 ');
+    tablero.background_draw('#045404','#04ac04 ');
+
     //dibujar pildora
     fill('#0474ec');
     rect(6*tablero.escala, 5*tablero.escala, 10*tablero.escala,10*tablero.escala, 0*tablero.escala);
@@ -103,23 +111,21 @@ function inicio(){
     rect(16*tablero.escala, 5*tablero.escala, 10*tablero.escala,10*tablero.escala, 0*tablero.escala);
     circle(25*tablero.escala, 10*tablero.escala,10*tablero.escala);
     
-    
+    //nombre mario
     fill(0);
     textSize(2.5*tablero.escala);
     text('Dr. MARIO',4.8*tablero.escala,9.2*tablero.escala,25*tablero.escala,5*tablero.escala);
     fill(255);
     textSize(2.5*tablero.escala);
     text('Dr. MARIO',5*tablero.escala,9*tablero.escala,25*tablero.escala,5*tablero.escala); 
-
+    //menu mario
     fill(0);
     rect(4*tablero.escala, 20*tablero.escala, 25*tablero.escala,7*tablero.escala, 5*tablero.escala);
-
     image(mario_esperando,4*tablero.escala,21*tablero.escala,4.5*tablero.escala,5*tablero.escala);
     image(virus_azul_caminado,25*tablero.escala,22*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
+
     //texto
     fill(255);
-    let time = second();
-    console.log(time);
     textSize(1*tablero.escala+((time%2)*0.05*tablero.escala));
     textAlign(CENTER);
     text('PRESS ENTER',10*tablero.escala,23*tablero.escala,15*tablero.escala,2*tablero.escala); 
@@ -129,15 +135,6 @@ function inicio(){
      intro.play();
       
     } */
-
-    //dibuja botones e iconos
-    //jugar.draw();
-    //dibuja tutorial
-    /* image(tutorial_asd,14*tablero.escala,5*tablero.escala,7*tablero.escala,4*tablero.escala);
-    image(tutorial_espacio,13*tablero.escala,10*tablero.escala,9*tablero.escala,5*tablero.escala); */
-    //informacion del jugador
-    /* textSize(2*tablero.escala);*/
-   
     
 }
 
