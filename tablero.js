@@ -74,6 +74,23 @@ class Tablero {
         }
         return arr
     }
+
+    actualizaroterminar(){
+        if (figura.relposX <= 0 | figura.relposY <= 0) {
+            console.log('ojo 3');
+            return false
+        }
+
+        for (let i = 0; i < figura.forma[figura.rotacion].length; i++) {
+            for (let j = 0; j < figura.forma[figura.rotacion][i].length; j++) {
+                if(figura.forma[figura.rotacion][i][j] != 'blank'){
+                    this.casillas[figura.relposY + i - 1].splice(figura.relposX + j - 1, 1, ['pastilla', figura.forma[figura.rotacion][i][j]]);
+                }
+            }
+        }
+
+        return true;
+    }
 /*
     verificar_lineas() {
         let flag;
