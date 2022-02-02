@@ -70,7 +70,7 @@ function juego(){
         if(!figura.mover(0,+1))
         {
             //actualiza el tablero segun la ficha o verifica el game over
-            if(!tablero.verificar_colisiones(1))
+            if(!tablero.actualizaroterminar())
             {
 
                 tablero.estado = 3;

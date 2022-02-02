@@ -135,7 +135,7 @@ class Ficha {
           for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
             if((this.relposX - 1 == 0)){
               return false;
-            } else if ((this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY - 1 + i][this.relposX - 1 + x][0] != 'blank')) {
+            } else if ((this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + x - 1][0] != 'blank')) {
               return false;
             }
           }
@@ -146,7 +146,7 @@ class Ficha {
             if(this.relposX + j == tablero.casillas[0].length){
               return false;
             }
-            if ((this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY - 1][this.relposX + j][0] != 'blank') | (this.relposX + j >= tablero.casillas[0].length)) {
+            if ((this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - 1][this.relposX + j][0] != 'blank') | (this.relposX + j >= tablero.casillas[0].length)) {
               return false;
             }
           }
@@ -158,7 +158,7 @@ class Ficha {
           if(this.relposY + i == tablero.casillas.length){
             return false;
           }
-          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i][this.relposX - 1 + j][0] != 'blank') {
+          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i][this.relposX + j - 1][0] != 'blank') {
             return false;
           }
         }
@@ -179,13 +179,6 @@ class Ficha {
       this.relposX += x;
       this.relposY += y;
     }
-
-
-    /*if (!tablero.verificar_colisiones()) {
-      this.x = this.x - (this.escala * x);
-      this.y = this.y - (this.escala * y);
-      return false;
-    }*/
     return true;
   }
 
