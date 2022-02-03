@@ -50,50 +50,14 @@ function espera(){
   text("PAUSA",15*tablero.escala,9*tablero.escala);
 }
 function juego(){
-      //verifica musica
- /*      muscia_juego.setVolume(tablero.volumen);
-      if(!muscia_juego.isPlaying()){
-        muscia_juego.play();
-        
-      } */
-   //tablero.informacion();
-    //boton_pausa.draw();
-
+  
     tablero.background_draw('#44049c','#040404')
     tablero.dibujar();
     figura.dibujar();
-    
 
-    /* if(tablero.nivel>=10){
-      resta = 59;
-    }else{
-      resta = tablero.nivel*6;
-    }
-    if(tablero.frames == 60-resta){
-        tablero.frames = 0;
-     
-        //verificar colisiones al mover hacia abajo
-        if(!figura.mover(0,+1))
-        {
-            //actualiza el tablero segun la ficha o verifica el game over
-            if(!tablero.actualizaroterminar())
-            {
-
-                tablero.estado = 3;
-                muscia_juego.stop();
-            }else{
-                //el objeto colisiono y se regenera
-                figura.vida = 0;
-            };
-            
-            //verifica la vida de la ficha
-            figura.reiniciar();
-            //verifica si se hace una linea despues de cada colision final.
-            tablero.verificar_lineas();
-        }
-        
-    } */
-    tablero.frames++;
+    //elementos del talbero
+    tablero.lupa_virus([6,21],[[1,1],[5,5],[10,10]]);
+  
 }
 
 function inicio(){
@@ -150,7 +114,21 @@ function inicio(){
   function preload(){
     //carga de animaciones
     mario_esperando = loadImage('img/mario/esperando.gif');
+
+
+    //virus
+    //virus_sprites = []
     virus_azul_caminado = loadImage('img/azul/caminando.gif');
+    virus_azul_muriendo = loadImage('img/azul/muriendo.gif');
+    virus_azul_riendo = loadImage('img/azul/riendo.gif');
+
+    virus_rojo_caminado = loadImage('img/rojo/caminando.gif');
+    virus_rojo_muriendo = loadImage('img/rojo/muriendo.gif');
+    virus_rojo_riendo = loadImage('img/rojo/riendo.gif');
+
+    virus_amarillo_caminado = loadImage('img/amarillo/caminando.gif');
+    virus_amarillo_muriendo = loadImage('img/amarillo/muriendo.gif');
+    virus_amarillo_riendo = loadImage('img/amarillo/riendo.gif');
     //carga de fuente texto;
     fuente = loadFont('text/PressStart2P.ttf')
  
@@ -164,30 +142,9 @@ function inicio(){
   }
 
 
-  function tema(tema){
-    img = loadImage('img/texture'+tema+'.jpg');
-    switch (tema) {
-      case 1:
-        fondo = color(250,250,50,50);
-        break;
-  
-      case 2:
-        fondo = color(50,50,50,50);
-        break;
-  
-  
-      case 3:
-        fondo = color(50,50,250,50);
-        break;
-      default:
-        break;
-    }
-  }
-
-  
+//funcion para cambiar el nivel de la musica   
 function range(x){
   x = parseFloat(x);
-  console.log(x);
   tablero.volumen = x;
 }
 

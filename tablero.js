@@ -4,6 +4,7 @@ class Tablero {
         this.frames = 0;
         this.background = [32, 30];
         this.posicion = [posx,posy];
+        this.virus = [1,1,1];
         //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', '#FFFFFF', false]);
         this.casillas[4][5] = ['prueba', '#0000ff', false];
@@ -90,6 +91,37 @@ class Tablero {
         }
 
         return true;
+    }
+
+    lupa_virus(posicion, virus_pos){
+        let nombres_virus = ['virus_amarillo_','virus_azul_','virus_rojo_'];
+        //dibujando el lente de la lupa
+        fill('#737573');
+        strokeWeight(3);
+        stroke(0)
+        circle(posicion[0]*this.escala,posicion[1]*this.escala,10*this.escala);
+        fill('#5a96ff');
+        circle(posicion[0]*this.escala,posicion[1]*this.escala,9.2*this.escala);
+       //dibujar virus
+        
+        for(let i =0; i< this.virus.length;i++){
+            switch (this.virus[i]) {
+                case 1:
+                    //image(nombres_virus[i]+'caminando',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    break;
+                case 2:
+                    image(nombres_virus[i]+'muriendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    break;
+                case 3:
+                    image(nombres_virus[i]+'riendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    break;
+            
+                default:
+                    break;
+            }
+            
+        }
+
     }
 /*
     verificar_lineas() {
