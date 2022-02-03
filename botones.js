@@ -114,7 +114,7 @@ function keyPressed() {
       tablero.nitro();
       break;
     case 67:
-      tablero.actualizar();
+      tablero.actualizaroterminar();
       break;
   }
 

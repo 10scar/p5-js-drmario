@@ -5,13 +5,14 @@ class Tablero {
         this.background = [32, 30];
         this.posicion = [posx,posy];
         this.virus = [1,1,1];
-        //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
-        this.casillas = this.array2d(dimy, dimx, ['blank', '#FFFFFF', false]);
-        this.casillas[4][5] = ['prueba', '#0000ff', false];
         this.estado = 1;
         this.volumen = 0.3;
         this.nivel = 1;
         this.lineas = 0;
+        //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
+        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#FFFFFF', false]);
+        this.generarVirus();
+        //this.casillas[4][5] = ['prueba', '#0000ff', false];
 
 
     }
@@ -35,7 +36,7 @@ class Tablero {
         for (let i = 0; i < this.casillas.length; i++) {
             for (let x = 0; x < this.casillas[i].length; x++) {
 
-                fill(this.casillas[i][x][1])
+                fill(this.casillas[i][x][2])
                 rect((this.escala *x) + this.escala*this.posicion[0], (this.escala * i) + this.escala*this.posicion[1], this.escala);
             }
         }
@@ -77,7 +78,7 @@ class Tablero {
     }
 
     actualizaroterminar(){
-        if (figura.relposX <= 0 | figura.relposY <= 0) {
+        if (figura.relposY - this.posicion[1] <= 0) {
             console.log('ojo 3');
             return false
         }
@@ -85,7 +86,7 @@ class Tablero {
         for (let i = 0; i < figura.forma[figura.rotacion].length; i++) {
             for (let j = 0; j < figura.forma[figura.rotacion][i].length; j++) {
                 if(figura.forma[figura.rotacion][i][j] != 'blank'){
-                    this.casillas[figura.relposY + i - 1].splice(figura.relposX + j - 1, 1, ['pastilla', figura.forma[figura.rotacion][i][j]]);
+                    this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1]]);
                 }
             }
         }
@@ -122,6 +123,45 @@ class Tablero {
             
         }
 
+    }
+
+    generarVirus(){
+        let numvirus = (this.nivel - 1) * 4 + 4;
+        let maxFila;
+
+        switch(this.nivel){
+            default:
+                maxFila = 6;
+                break;
+            case 15:
+            case 16:
+                maxFila = 5;
+                break;
+            case 17:
+            case 18:
+                maxFila = 4;
+                break;
+            case 19:
+            case 20:
+                maxFila = 3;
+                break;
+        }
+
+        for(let i = 1; i <= numvirus; i++){
+            let vx = Math.floor(random(0, this.casillas[0].length));
+            let vy = Math.floor(random(maxFila, this.casillas.length));
+            
+            if(this.casillas[vy][vx][0] != 'blank'){
+                vx = Math.floor(random(0, this.casillas[0].length));
+                vy = Math.floor(random(maxFila, this.casillas.length)); 
+            }
+
+            let color = random(colores);
+            this.casillas[vy].splice(vx, 1, ['Virus', color[0], color[1]]);
+
+            print('new virus en: ' + vx + ', ' + vy);
+            print(this.casillas[vy][vx][0]);
+        }
     }
 /*
     verificar_lineas() {

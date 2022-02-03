@@ -9,11 +9,11 @@ const figuras = {
 
 };*/
 
-const colores = {
-  rojo: '#FF0000',
-  azul: '#0000ff',
-  amarillo: '#ffff00',
-};
+const colores = [
+  ['rojo', '#FF0000'],
+  ['azul', '#0000ff'],
+  ['amarillo', '#ffff00']
+]
 
 ///en construccion.
 class Ficha {
@@ -30,7 +30,7 @@ class Ficha {
   }
 
   get color1() {
-    this._color1 = this._color1 == undefined ? this.random(colores) : this._color1
+    this._color1 = this._color1 == undefined ? random(colores) : this._color1
     return this._color1;
   }
   set color1(color) {
@@ -38,7 +38,7 @@ class Ficha {
   }
 
   get color2() {
-    this._color2 = this._color2 == undefined ? this.random(colores) : this._color2
+    this._color2 = this._color2 == undefined ? random(colores) : this._color2
     return this._color2;
   }
   set color2(color) {
@@ -69,11 +69,11 @@ class Ficha {
   }
 
 
-  random(obj) {
+  /*random(obj) {
     let key = Object.values(obj);
     let fig = key[Math.floor(Math.random() * key.length)];
     return fig;
-  }
+  }*/
 
   dibujar() {
     //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado
@@ -81,7 +81,7 @@ class Ficha {
     for (let i = 0; i < this.forma[this.rotacion].length; i++) {
       for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
         if (this.forma[this.rotacion][i][j] != 'blank') {
-          fill(this.forma[this.rotacion][i][j]);
+          fill(this.forma[this.rotacion][i][j][1]);
           square(j * this.escala + this.x, i * this.escala + this.y, this.escala);
         }
       }
@@ -169,9 +169,9 @@ class Ficha {
   }
 
   mover(x, y = 0) {
-    /*if(tablero.estado !=1){
+    if(tablero.estado !=1){
         return false;
-    }*/
+    }
     if(this.tryMove(x, y)){
       this.x = this.x + (this.escala * x);
       this.y = this.y + (this.escala * y);
@@ -192,9 +192,9 @@ class Ficha {
       }*/
 
   rotar() {
-    /*if(tablero.estado !=1){
+    if(tablero.estado !=1){
         return false;
-    }*/
+    }
     if (this.tryrotate()) {
       this.rotacion += 1;
       if (this.rotacion == this.forma.length) {
