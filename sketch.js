@@ -5,6 +5,7 @@ let tamaño = {
   height:0,
   escala:0,
 }
+
 //varables de imagenes
 let mario_esperando, virus_azul_caminado;
 //variable para la fuente
@@ -45,6 +46,7 @@ function setup() {
 }
 
 function draw() {
+  
   clear();
 
   //figura.forma = figuras.o

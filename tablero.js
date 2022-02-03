@@ -95,7 +95,7 @@ class Tablero {
     }
 
     lupa_virus(posicion, virus_pos){
-        let nombres_virus = ['virus_amarillo_','virus_azul_','virus_rojo_'];
+     
         //dibujando el lente de la lupa
         fill('#737573');
         strokeWeight(3);
@@ -103,18 +103,23 @@ class Tablero {
         circle(posicion[0]*this.escala,posicion[1]*this.escala,10*this.escala);
         fill('#5a96ff');
         circle(posicion[0]*this.escala,posicion[1]*this.escala,9.2*this.escala);
+
        //dibujar virus
-        
+       //translate(Math.sin(second())*tablero.escala,Math.cos(second())*tablero.escala);
         for(let i =0; i< this.virus.length;i++){
+            
+            //rotate(PI / 180*120);
+            //imageMode(CENTER);
             switch (this.virus[i]) {
                 case 1:
-                    //image(nombres_virus[i]+'caminando',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    //image(virus_sprites[i*3],1*tablero.escala,0*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
+                    image(virus_sprites[i*3],virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
                     break;
                 case 2:
-                    image(nombres_virus[i]+'muriendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    image(nombres_virus[(i*3)+1]+'muriendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
                     break;
                 case 3:
-                    image(nombres_virus[i]+'riendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    image(nombres_virus[(i*3)+2]+'riendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
                     break;
             
                 default:

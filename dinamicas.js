@@ -1,3 +1,4 @@
+
 function dinamicas(){
     config.draw();
     //casos de juego, 0,iniciar tuttorial, 1 juego, 2 pausa, 3 game over
@@ -56,11 +57,12 @@ function juego(){
     figura.dibujar();
 
     //elementos del talbero
-    tablero.lupa_virus([6,21],[[1,1],[5,5],[10,10]]);
+    tablero.lupa_virus([6,21],[[4.5,17],[6.5,20],[2,20]]);
   
 }
 
 function inicio(){
+  
     let time = second();
     
     textFont(fuente);
@@ -117,18 +119,25 @@ function inicio(){
 
 
     //virus
-    //virus_sprites = []
-    virus_azul_caminado = loadImage('img/azul/caminando.gif');
-    virus_azul_muriendo = loadImage('img/azul/muriendo.gif');
-    virus_azul_riendo = loadImage('img/azul/riendo.gif');
+    virus_sprites = [
 
-    virus_rojo_caminado = loadImage('img/rojo/caminando.gif');
-    virus_rojo_muriendo = loadImage('img/rojo/muriendo.gif');
-    virus_rojo_riendo = loadImage('img/rojo/riendo.gif');
+      virus_azul_caminado = loadImage('img/azul/caminando.gif'),
+      virus_azul_muriendo = loadImage('img/azul/muriendo.gif'),
+      virus_azul_riendo = loadImage('img/azul/riendo.gif'), 
 
-    virus_amarillo_caminado = loadImage('img/amarillo/caminando.gif');
-    virus_amarillo_muriendo = loadImage('img/amarillo/muriendo.gif');
-    virus_amarillo_riendo = loadImage('img/amarillo/riendo.gif');
+      virus_rojo_caminado = loadImage('img/rojo/caminando.gif'),
+      virus_rojo_muriendo = loadImage('img/rojo/muriendo.gif'),
+      virus_rojo_riendo = loadImage('img/rojo/riendo.gif'),
+
+      virus_amarillo_caminado = loadImage('img/amarillo/caminando.gif'),
+      virus_amarillo_muriendo = loadImage('img/amarillo/muriendo.gif'),
+      virus_amarillo_riendo = loadImage('img/amarillo/riendo.gif')
+    ]
+    
+
+    
+
+    
     //carga de fuente texto;
     fuente = loadFont('text/PressStart2P.ttf')
  
