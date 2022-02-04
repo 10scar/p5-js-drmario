@@ -9,7 +9,7 @@ class Tablero {
         this.volumen = 0.3;
         this.nivel = 1;
         this.lineas = 0;
-        //organización casillas: [tipo, relleno, roto (true)/no roto (false)]
+        //organización casillas: [tipo, color, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#FFFFFF', false]);
         this.generarVirus();
         //this.casillas[4][5] = ['prueba', '#0000ff', false];
@@ -65,9 +65,11 @@ class Tablero {
             for (let j = 0; j < figura.forma[figura.rotacion][i].length; j++) {
                 if(figura.forma[figura.rotacion][i][j] != 'blank'){
                     this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1]]);
+                    this.verificar_lineas();
                 }
             }
         }
+
 
         return true;
     }
@@ -146,6 +148,22 @@ class Tablero {
             print(this.casillas[vy][vx][0]);
         }
     }
+
+    verificar_lineas(){
+        for(let i = 0; i < this.casillas.length; i++){
+            let pastillasconsecutivasX = 1;
+            for(let j = 0; j < this.casillas[0].length - 2; j++){
+                print(this.casillas[i][j + 1][0]);
+                if((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][0] == this.casillas[i][j + 1][0])){
+                    pastillasconsecutivasX += 1;
+                }
+            }
+
+            if(pastillasconsecutivasX >= 4){
+                print(true);
+            }
+        }
+    }
 /*
     verificar_lineas() {
         let flag;
@@ -168,71 +186,6 @@ class Tablero {
 
             }
         }
-    }
-
-
-    verificar_colisiones(x = 0) {
-        let fig = figura.forma[figura.rotacion];
-        let cua = figura.forma[4] //tamaño de la cuadricula del bitboard
-        let bin = fig.toString(2); //numero del bitboard a base 2
-        bin = '0'.repeat((cua * cua) - bin.length) + bin;
-        let escala = figura.escala;
-        let x1 = Math.round(figura.x / escala);
-
-        let y1 = Math.round(figura.y / escala);
-        let casillas = '';
-
-        //
-        for (let i = 0; i < cua * cua; i++) {
-
-            let mask = '0'.repeat(i) + '1' + '0'.repeat((cua * cua - 1) - i);
-
-
-            if ((parseInt(mask, 2) & fig) != 0) {
-
-                switch (x) {
-                    case 0:
-                        if (x1 <= 0 | y1 <= 0 | x1 > this.casillas[0].length | y1 > this.casillas.length) {
-                            console.log('ojo');
-
-                            return false;
-                        }
-                        else {
-                            casillas = this.casillas[y1 - 1][x1 - 1];
-                            if (casillas != '#FFFFFF') {
-                                console.log('ojo 2');
-                                console.log(x1);
-                                console.log(y1);
-
-                                return false;
-                            }
-                        }
-                        break;
-                    case 1:
-                        if (x1 <= 0 | y1 <= 0) {
-                            console.log('ojo 3');
-                            return false
-                        }
-                        tablero.casillas[y1 - 1][x1 - 1] = figura.color;
-                        break;
-                    default:
-                        break;
-                }
-
-
-
-
-
-
-            }
-
-            x1 = x1 + 1;
-            if (((i + 1) % cua) == 0) {
-                y1 = y1 + 1;
-                x1 = Math.round(figura.x / escala);
-            }
-
-        } return true;
     }
 
     nitro() {

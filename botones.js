@@ -116,6 +116,9 @@ function keyPressed() {
     case 67:
       tablero.actualizaroterminar();
       break;
+    case 88:
+      figura.reiniciar();
+      break;
   }
 
 }

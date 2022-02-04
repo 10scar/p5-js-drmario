@@ -21,13 +21,14 @@ class Ficha {
   constructor(rotacion = 1, escala = 100) {
     this.escala = escala;
     this.rotacion = rotacion;
-    this.vida = 1;
+    this.vida = 0;
     this.relposX = 16;
     this.relposY = 10;
     this.x = this.relposX * this.escala;
     this.y = this.relposY * this.escala;
-
   }
+
+
 
   get color1() {
     this._color1 = this._color1 == undefined ? random(colores) : this._color1
@@ -67,13 +68,6 @@ class Ficha {
     this._rotacion = rotacion;
     return;
   }
-
-
-  /*random(obj) {
-    let key = Object.values(obj);
-    let fig = key[Math.floor(Math.random() * key.length)];
-    return fig;
-  }*/
 
   dibujar() {
     //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado
@@ -128,22 +122,22 @@ class Ficha {
 
   tryMove(x, y) {
     if (y == 0) {
-    
+
       if (x == -1) {
         //chequea si hay elementos en el tablero que generen colisión a la izquierda
         for (let i = 0; i < this.forma[this.rotacion].length; i++) {
           for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
-            if((this.relposX - tablero.posicion[0] == 0)){
+            if ((this.relposX - tablero.posicion[0] == 0)) {
               return false;
             } else if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + x - tablero.posicion[0]][0] != 'blank') {
               return false;
             }
           }
         }
-      } else if (x == 1){
+      } else if (x == 1) {
         for (let i = 0; i < this.forma[this.rotacion].length; i++) {
           for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
-            if(this.relposX - tablero.posicion[0] + j + 1 == tablero.casillas[0].length){
+            if (this.relposX - tablero.posicion[0] + j + 1 == tablero.casillas[0].length) {
               return false;
             }
             if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[(this.relposY - tablero.posicion[1]) + i][this.relposX - tablero.posicion[0] + j + 1][0] != 'blank') {
@@ -155,10 +149,10 @@ class Ficha {
     } else {
       for (let i = this.forma[this.rotacion].length - 1; i >= 0; i--) {
         for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
-          if((this.relposY - tablero.posicion[1]) + i + 1 == tablero.casillas.length){
+          if ((this.relposY - tablero.posicion[1]) + i + 1 == tablero.casillas.length) {
             return false;
           }
-          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY- tablero.posicion[1] + i + 1][this.relposX + j - tablero.posicion[0]][0] != 'blank') {
+          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY - tablero.posicion[1] + i + 1][this.relposX + j - tablero.posicion[0]][0] != 'blank') {
             return false;
           }
         }
@@ -169,31 +163,35 @@ class Ficha {
   }
 
   mover(x, y = 0) {
-    if(tablero.estado !=1){
-        return false;
+    if (tablero.estado != 1) {
+      return false;
     }
-    if(this.tryMove(x, y)){
+    if (this.tryMove(x, y)) {
       this.x = this.x + (this.escala * x);
       this.y = this.y + (this.escala * y);
-  
+
       this.relposX += x;
       this.relposY += y;
     }
     return true;
   }
 
-  /*    reiniciar(){
-      if(this.vida == 0){
-          this.color1 = this.random(colors);
-          this.forma = this.random(figuras);
-          this.vida= 1;
-          this.x = 4*this.escala;
-          this.y=0*this.escala; 
-      }*/
+  reiniciar() {
+    //if (this.vida == 0) {
+      this.color1 = random(colores);
+      this.color2 = random(colores);
+      //this.vida = 1;
+      this.relposX = 16;
+      this.relposY = 10;
+
+      this.x = this.relposX * this.escala;
+      this.y = this.relposY * this.escala;
+    //}
+  }
 
   rotar() {
-    if(tablero.estado !=1){
-        return false;
+    if (tablero.estado != 1) {
+      return false;
     }
     if (this.tryrotate()) {
       this.rotacion += 1;
