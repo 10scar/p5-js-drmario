@@ -1,6 +1,6 @@
 
 function dinamicas() {
-  config.draw();
+  //config.draw();
   //casos de juego, 0,iniciar tuttorial, 1 juego, 2 pausa, 3 game over
   switch (tablero.estado) {
     case 0:
@@ -126,24 +126,24 @@ function windowResized() {
 //carga musica e imagenes
 function preload() {
   //carga de animaciones
-  mario_esperando = loadImage('img/mario/esperando.gif');
-  margen = loadImage('img/margen.png');
+  mario_esperando = loadGif('img/mario/esperando.gif');
+  margen = loadGif('img/margen.png');
 
 
   //virus
   virus_sprites = [
 
-    virus_azul_caminado = loadImage('img/azul/caminando.gif'),
-    virus_azul_muriendo = loadImage('img/azul/muriendo.gif'),
-    virus_azul_riendo = loadImage('img/azul/riendo.gif'),
+    virus_azul_caminado = loadGif('img/azul/caminando.gif'),
+    virus_azul_muriendo = loadGif('img/azul/muriendo.gif'),
+    virus_azul_riendo = loadGif('img/azul/riendo.gif'),
 
-    virus_rojo_caminado = loadImage('img/rojo/caminando.gif'),
-    virus_rojo_muriendo = loadImage('img/rojo/muriendo.gif'),
-    virus_rojo_riendo = loadImage('img/rojo/riendo.gif'),
+    virus_rojo_caminado = loadGif('img/rojo/caminando.gif'),
+    virus_rojo_muriendo = loadGif('img/rojo/muriendo.gif'),
+    virus_rojo_riendo = loadGif('img/rojo/riendo.gif'),
 
-    virus_amarillo_caminado = loadImage('img/amarillo/caminando.gif'),
-    virus_amarillo_muriendo = loadImage('img/amarillo/muriendo.gif'),
-    virus_amarillo_riendo = loadImage('img/amarillo/riendo.gif')
+    virus_amarillo_caminado = loadGif('img/amarillo/caminando.gif'),
+    virus_amarillo_muriendo = loadGif('img/amarillo/muriendo.gif'),
+    virus_amarillo_riendo = loadGif('img/amarillo/riendo.gif')
   ]
 
 
