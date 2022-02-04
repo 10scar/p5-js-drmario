@@ -10,7 +10,7 @@ class Tablero {
         this.nivel = 1;
         this.lineas = 0;
         //organización casillas: [tipo, color, relleno, roto (true)/no roto (false)]
-        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#FFFFFF', false]);
+        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#000000', false]);
         this.generarVirus();
         //this.casillas[4][5] = ['prueba', '#0000ff', false];
 
@@ -18,8 +18,7 @@ class Tablero {
     }
 
     background_draw(color1, color2) {
-        let colores = [color1, color2]
-
+        let colores = [color1, color2];
         for (let i = 0; i < this.background[0]; i++) {
             for (let m = 0; m < this.background[1]; m++) {
                 fill(colores[(m + i) % 2]);
@@ -32,11 +31,10 @@ class Tablero {
 
 
     dibujar() {
-        //console.log(this.casillas);
         for (let i = 0; i < this.casillas.length; i++) {
             for (let x = 0; x < this.casillas[i].length; x++) {
 
-                fill(this.casillas[i][x][2])
+                fill(this.casillas[i][x][2]);
                 rect((this.escala *x) + this.escala*this.posicion[0], (this.escala * i) + this.escala*this.posicion[1], this.escala);
             }
         }
@@ -74,6 +72,44 @@ class Tablero {
         return true;
     }
 
+    puntuacion_jugador(posicion_score, posicion_nivel){
+        ///cuadro de score y top
+        stroke(0);
+        fill('#f7be39');
+        rect(posicion_score[0]*this.escala,posicion_score[1]*this.escala, 9*this.escala,9*this.escala,10);
+        fill('#c6d7ff');
+        rect((posicion_score[0]+0.5)*this.escala,(posicion_score[1]+0.5)*this.escala, 8*this.escala,7.5*this.escala,10);
+        fill(0);
+        textSize(0.9*this.escala);
+        textStyle(NORMAL);
+        text('TOP' + '\n\n0000000',(posicion_score[0]+0.8)*this.escala,(posicion_score[1]+1.5)*this.escala, 8*this.escala,7.5*this.escala);
+        text('SCORE' + '\n\n0000000',(posicion_score[0]+0.8)*this.escala,(posicion_score[1]+5)*this.escala, 8*this.escala,7.5*this.escala);
+
+        ///cuadro nivel, speed, virus
+        fill('#f7be39');
+        rect(posicion_nivel[0]*this.escala,posicion_nivel[1]*this.escala, 8*this.escala,12*this.escala,10);
+        fill('#c6d7ff');
+        rect((posicion_nivel[0]+0.5)*this.escala,(posicion_nivel[1]+0.5)*this.escala, 7*this.escala,11*this.escala,10);
+        fill(0);
+        textSize(0.9*this.escala);
+        textStyle(NORMAL);
+        text('LEVEL' + '\n\n10',(posicion_nivel[0]+0.8)*this.escala,(posicion_nivel[1]+1.5)*this.escala, 8*this.escala,7.5*this.escala);
+        text('SPEED' + '\n\nMED',(posicion_nivel[0]+0.8)*this.escala,(posicion_nivel[1]+5)*this.escala, 8*this.escala,7.5*this.escala);
+        text('VIRUS' + '\n\n36',(posicion_nivel[0]+0.8)*this.escala,(posicion_nivel[1]+8.5)*this.escala, 8*this.escala,7.5*this.escala);
+    }
+
+    animacion_mario(posicion,estado){
+        fill(0);
+        stroke('#f7be39');
+        rect(posicion[0]*this.escala,posicion[1]*this.escala, 7*this.escala,7*this.escala,20);
+        if(estado == 0){
+            image(mario_pildora_1, (posicion[0]+1)*this.escala,(posicion[1]+1.5)*this.escala, 5*this.escala, 5*this.escala);
+        }else 
+        {
+            image(mario_pildora_2, (posicion[0]+1)*this.escala,(posicion[1]+1.5)*this.escala, 5*this.escala, 5*this.escala);    
+        }
+
+    }
     lupa_virus(posicion, virus_pos){
      
         //dibujando el lente de la lupa
@@ -92,14 +128,13 @@ class Tablero {
             //imageMode(CENTER);
             switch (this.virus[i]) {
                 case 1:
-                    //image(virus_sprites[i*3],1*tablero.escala,0*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
                     image(virus_sprites[i*3],virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
                     break;
                 case 2:
-                    image(nombres_virus[(i*3)+1]+'muriendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    image(virus_sprites[(i*3)+1]+'muriendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
                     break;
                 case 3:
-                    image(nombres_virus[(i*3)+2]+'riendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    image(virus_sprites[(i*3)+2]+'riendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
                     break;
             
                 default:

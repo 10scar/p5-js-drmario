@@ -56,10 +56,12 @@ function juego() {
   tablero.background_draw('#44049c', '#040404')
   tablero.dibujar();
   figura.dibujar();
-  tablero.dibujar_marco(12, 5, 10, 22)
+  tablero.dibujar_marco(12, 5, 10, 22);
 
   //elementos del talbero
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
+  tablero.puntuacion_jugador([0,4],[23,16]);
+  tablero.animacion_mario([23,8],0);
 
   gravedad();
   //tablero.verificar_lineas();
@@ -76,7 +78,7 @@ function inicio() {
 
   let time = second();
 
-  textFont(fuente);
+  
 
   tablero.background_draw('#045404', '#04ac04 ');
 
@@ -127,7 +129,10 @@ function windowResized() {
 function preload() {
   //carga de animaciones
   mario_esperando = loadGif('img/mario/esperando.gif');
-  margen = loadGif('img/margen.png');
+  mario_pildora_1 = loadImage('img/mario/mario_3.png');
+  mario_pildora_2 = loadImage('img/mario/mario_4.png');
+  margen = loadImage('img/margen.png');
+
 
 
   //virus

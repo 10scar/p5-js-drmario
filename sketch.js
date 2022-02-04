@@ -7,7 +7,8 @@ let tamaño = {
 }
 
 //varables de imagenes
-let mario_esperando,margen, virus_azul_caminado;
+let mario_esperando,mario_pildora_1,mario_pildora_2,margen, virus_azul_caminado;
+
 //variable para la fuente
 let fuente;
 
@@ -40,7 +41,7 @@ function setup() {
 
   tablero = new Tablero(tamaño.escala);
   figura = new Ficha(0,tamaño.escala);
-
+  textFont(fuente);
  // botones();
 
 }
