@@ -7,7 +7,7 @@ let tamaño = {
 }
 
 //varables de imagenes
-let mario_esperando, virus_azul_caminado;
+let mario_esperando,margen, virus_azul_caminado;
 //variable para la fuente
 let fuente;
 

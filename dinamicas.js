@@ -55,6 +55,7 @@ function juego(){
     tablero.background_draw('#44049c','#040404')
     tablero.dibujar();
     figura.dibujar();
+    tablero.dibujar_marco(12,5,10,22)
 
     //elementos del talbero
     tablero.lupa_virus([6,21],[[4.5,17],[6.5,20],[2,20]]);
@@ -62,7 +63,7 @@ function juego(){
 }
 
 function inicio(){
-  
+
     let time = second();
     
     textFont(fuente);
@@ -116,6 +117,7 @@ function inicio(){
   function preload(){
     //carga de animaciones
     mario_esperando = loadImage('img/mario/esperando.gif');
+    margen = loadImage('img/margen.png');
 
 
     //virus

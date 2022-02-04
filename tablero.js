@@ -43,30 +43,8 @@ class Tablero {
 
     }
 
-    dibujar_marco() {
-        let ancho = this.casillas[0].length;
-        let alto = this.casillas.length;
-
-        for (let i = 0; i < ancho + 2; i++) {
-
-            image(img, i * this.escala, 0, this.escala, this.escala);
-        }
-        for (let i = 0; i < ancho + 2; i++) {
-            image(img, i * this.escala, (alto + 1) * this.escala, this.escala, this.escala);
-        }
-
-        for (let i = 0; i < alto + 2; i++) {
-            image(img, 0, i * this.escala, this.escala, this.escala);
-        }
-
-        for (let i = 0; i < alto + 2; i++) {
-            image(img, 0, i * this.escala, this.escala, this.escala);
-        }
-
-        for (let i = 0; i < alto + 2; i++) {
-            image(img, (ancho + 1) * this.escala, i * this.escala, this.escala, this.escala);
-        }
-
+    dibujar_marco(x,y,ancho,alto) {
+        image(margen, x*this.escala,y*this.escala, ancho*this.escala,alto*this.escala);
     }
 
     array2d(y, x, z) {
