@@ -13,7 +13,6 @@ class Tablero {
         //organización casillas: [tipo, color, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#000000', false]);
         this.generarVirus();
-        //this.casillas[4][5] = ['prueba', '#0000ff', false];
 
 
     }
@@ -64,7 +63,6 @@ class Tablero {
             for (let j = 0; j < figura.forma[figura.rotacion][i].length; j++) {
                 if(figura.forma[figura.rotacion][i][j] != 'blank'){
                     this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1]]);
-                    this.verificar_lineas();
                 }
             }
         }
@@ -187,11 +185,15 @@ class Tablero {
     verificar_lineas(){
         for(let i = 0; i < this.casillas.length; i++){
             let pastillasconsecutivasX = 1;
-            for(let j = 0; j < this.casillas[0].length - 2; j++){
-                print(this.casillas[i][j + 1][0]);
+            let pastillasconsecutivasY = 1;
+            for(let j = 0; j < this.casillas[0].length - 2; j++){   
                 if((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][0] == this.casillas[i][j + 1][0])){
                     pastillasconsecutivasX += 1;
                 }
+            }
+
+            for(let j = 0; j < this.casillas[0].length; j++){
+                
             }
 
             if(pastillasconsecutivasX >= 4){
@@ -199,31 +201,8 @@ class Tablero {
             }
         }
     }
-/*
-    verificar_lineas() {
-        let flag;
-        for (let i = 0; i < this.casillas.length; i++) {
-            flag = true;
-            for (let m = 0; m < this.casillas.length; m++) {
-                if (this.casillas[i][m] == '#FFFFFF') {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag) {
-                this.casillas.splice(i, 1);
-                this.casillas.unshift(new Array(this.casillas[0].length).fill('#FFFFFF'));
-                this.lineas++;
-                jugador.puntuacion = (2 * this.nivel) + jugador.puntuacion;
-                if (this.lineas % 5 == 0) {
-                    this.nivel++;
-                }
 
-            }
-        }
-    }
-
-    nitro() {
+    /*nitro() {
         if (tablero.estado != 1) {
             return false;
         }
@@ -234,25 +213,26 @@ class Tablero {
         tablero.verificar_colisiones(1);
         figura.vida = 0;
         return true;
-    }
+    }*/
 
     informacion() {
         //informacion del jugador
-        textSize(2 * this.escala);
-        text(jugador.nombre, 13 * this.escala, 2 * this.escala);
+        //textSize(2 * this.escala);
+        //text(jugador.nombre, 13 * this.escala, 2 * this.escala);
         fill(255, 255, 255);
         textSize(1 * this.escala);
         text("Nivel :" + this.nivel, 13 * this.escala, 4 * this.escala);
-        text("Puntuación :" + jugador.puntuacion, 13 * this.escala, 5 * this.escala);
+        text("Puntuación :" /*+ jugador.puntuacion*/, 13 * this.escala, 5 * this.escala);
         text("Lineas :" + this.lineas, 13 * this.escala, 7 * this.escala);
     }
 
     restablecer() {
-        this.casillas = this.array2d(this.casillas.length, this.casillas[0].length, '#FFFFFF');
         this.nivel = 1;
         this.puntuacion = 0;
         this.lineas = 0;
+
+        this.casillas = this.array2d(this.casillas.length, this.casillas[0].length, ['blank', 'blanco', '#000000', false]);
+        this.generarVirus();
     }
-*/
 
 }

@@ -1,14 +1,3 @@
-/*const colors = ['#11B6CA','#CA1178','#DA522E'];
-const figuras = {
-    l: [3840,8738,240,17476,4],
-    j: [312,210,57,150,3],
-    o: [26112,26112,26112,26112,4],
-    s: [240,153,30,306,3],
-    t: [184,154,58,178,3],
-    z: [408,90,51,180,3],
-
-};*/
-
 const colores = [
   ['rojo', '#FF0000'],
   ['azul', '#0000ff'],
@@ -173,12 +162,12 @@ class Ficha {
       this.relposX += x;
       this.relposY += y;
     }
-    return true;
+    return this.tryMove(x, y);
   }
 
   reiniciar() {
-    //if (this.vida == 0) {
-      //this.vida = 1;
+    if (this.vida == 0) {
+      this.vida = 1;
       this.relposX = 16;
       this.relposY = 10;
 
@@ -196,7 +185,7 @@ class Ficha {
         [[this.color2, this.color1]],
         [[this.color2], [this.color1]]
       ];
-    //}
+    }
   }
 
   rotar() {

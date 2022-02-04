@@ -28,11 +28,11 @@ function dinamicas() {
 function game_over() {
 
   //verifica musica
-  intro.setVolume(tablero.volumen);
+  /*intro.setVolume(tablero.volumen);
   if (!intro.isPlaying()) {
     intro.play();
 
-  }
+  }*/
 
   tablero.informacion();
   fill(0, 200, 0);
@@ -60,17 +60,37 @@ function juego() {
 
   //elementos del talbero
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
-  tablero.puntuacion_jugador([0,4],[23,16]);
-  tablero.animacion_mario([23,8],0);
+  tablero.puntuacion_jugador([0, 4], [23, 16]);
+  tablero.animacion_mario([23, 8], 0);
 
-  gravedad();
-  //tablero.verificar_lineas();
+  //se verifica que no se pueda mover la figura hacia abajo
+  if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
+    if (!tablero.actualizaroterminar()) {
+      //tablero.estado = 3;
+    } else {
+      figura.vida = 0;
+
+    }
+
+    figura.reiniciar();
+
+  }
+
+  gravedad(0);
+  tablero.verificar_lineas();
 
 }
 
-function gravedad(){
-  if(frameCount % 32 == 0){
-    figura.mover(0, 1);
+function gravedad(type) {
+  switch(type){
+    case 0:
+      if (frameCount % 32 == 0) {
+        figura.mover(0, 1);
+      }
+      break;
+    case 1:
+
+    break;
   }
 }
 
@@ -78,7 +98,7 @@ function inicio() {
 
   let time = second();
 
-  
+
 
   tablero.background_draw('#045404', '#04ac04 ');
 
