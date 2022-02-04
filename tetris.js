@@ -178,14 +178,24 @@ class Ficha {
 
   reiniciar() {
     //if (this.vida == 0) {
-      this.color1 = random(colores);
-      this.color2 = random(colores);
       //this.vida = 1;
       this.relposX = 16;
       this.relposY = 10;
 
       this.x = this.relposX * this.escala;
       this.y = this.relposY * this.escala;
+
+      print(this.color1);
+      this.color1 = random(colores);
+      this.color2 = random(colores);
+      print(this.color1);
+
+      this.forma = [
+        [[this.color1, this.color2]],
+        [[this.color1], [this.color2]],
+        [[this.color2, this.color1]],
+        [[this.color2], [this.color1]]
+      ];
     //}
   }
 

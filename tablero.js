@@ -9,6 +9,7 @@ class Tablero {
         this.volumen = 0.3;
         this.nivel = 1;
         this.lineas = 0;
+        this.numvirus = (this.nivel - 1) * 4 + 4;
         //organización casillas: [tipo, color, relleno, roto (true)/no roto (false)]
         this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#000000', false]);
         this.generarVirus();
@@ -146,7 +147,6 @@ class Tablero {
     }
 
     generarVirus(){
-        let numvirus = (this.nivel - 1) * 4 + 4;
         let maxFila;
 
         switch(this.nivel){
@@ -167,7 +167,7 @@ class Tablero {
                 break;
         }
 
-        for(let i = 1; i <= numvirus; i++){
+        for(let i = 1; i <= this.numvirus; i++){
             let vx = Math.floor(random(0, this.casillas[0].length));
             let vy = Math.floor(random(maxFila, this.casillas.length));
             
