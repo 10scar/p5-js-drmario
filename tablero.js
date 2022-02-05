@@ -1,10 +1,10 @@
 class Tablero {
-    constructor(escala = 100, dimy = 16, dimx = 8,posx = 13, posy =10) {
+    constructor(escala = 100, dimy = 16, dimx = 8, posx = 13, posy = 10) {
         this.escala = escala;
         this.frames = 0;
         this.background = [32, 30];
-        this.posicion = [posx,posy];
-        this.virus = [1,1,1];
+        this.posicion = [posx, posy];
+        this.virus = [1, 1, 1];
         this.estado = 1;
         this.volumen = 0.3;
         this.nivel = 1;
@@ -35,14 +35,14 @@ class Tablero {
             for (let x = 0; x < this.casillas[i].length; x++) {
 
                 fill(this.casillas[i][x][2]);
-                rect((this.escala *x) + this.escala*this.posicion[0], (this.escala * i) + this.escala*this.posicion[1], this.escala);
+                rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
             }
         }
 
     }
 
-    dibujar_marco(x,y,ancho,alto) {
-        image(margen, x*this.escala,y*this.escala, ancho*this.escala,alto*this.escala);
+    dibujar_marco(x, y, ancho, alto) {
+        image(margen, x * this.escala, y * this.escala, ancho * this.escala, alto * this.escala);
     }
 
     array2d(y, x, z) {
@@ -53,15 +53,15 @@ class Tablero {
         return arr
     }
 
-    actualizaroterminar(){
+    actualizaroterminar() {
         if (figura.relposY - this.posicion[1] <= 0) {
-            console.log('ojo 3');
+            console.log('Perdida');
             return false
         }
 
         for (let i = 0; i < figura.forma[figura.rotacion].length; i++) {
             for (let j = 0; j < figura.forma[figura.rotacion][i].length; j++) {
-                if(figura.forma[figura.rotacion][i][j] != 'blank'){
+                if (figura.forma[figura.rotacion][i][j] != 'blank') {
                     this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1]]);
                 }
             }
@@ -71,83 +71,82 @@ class Tablero {
         return true;
     }
 
-    puntuacion_jugador(posicion_score, posicion_nivel){
+    puntuacion_jugador(posicion_score, posicion_nivel) {
         ///cuadro de score y top
         stroke(0);
         fill('#f7be39');
-        rect(posicion_score[0]*this.escala,posicion_score[1]*this.escala, 9*this.escala,9*this.escala,10);
+        rect(posicion_score[0] * this.escala, posicion_score[1] * this.escala, 9 * this.escala, 9 * this.escala, 10);
         fill('#c6d7ff');
-        rect((posicion_score[0]+0.5)*this.escala,(posicion_score[1]+0.5)*this.escala, 8*this.escala,7.5*this.escala,10);
+        rect((posicion_score[0] + 0.5) * this.escala, (posicion_score[1] + 0.5) * this.escala, 8 * this.escala, 7.5 * this.escala, 10);
         fill(0);
-        textSize(0.9*this.escala);
+        textSize(0.9 * this.escala);
         textStyle(NORMAL);
-        text('TOP' + '\n\n0000000',(posicion_score[0]+0.8)*this.escala,(posicion_score[1]+1.5)*this.escala, 8*this.escala,7.5*this.escala);
-        text('SCORE' + '\n\n0000000',(posicion_score[0]+0.8)*this.escala,(posicion_score[1]+5)*this.escala, 8*this.escala,7.5*this.escala);
+        text('TOP' + '\n\n0000000', (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('SCORE' + '\n\n0000000', (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
 
         ///cuadro nivel, speed, virus
         fill('#f7be39');
-        rect(posicion_nivel[0]*this.escala,posicion_nivel[1]*this.escala, 8*this.escala,12*this.escala,10);
+        rect(posicion_nivel[0] * this.escala, posicion_nivel[1] * this.escala, 8 * this.escala, 12 * this.escala, 10);
         fill('#c6d7ff');
-        rect((posicion_nivel[0]+0.5)*this.escala,(posicion_nivel[1]+0.5)*this.escala, 7*this.escala,11*this.escala,10);
+        rect((posicion_nivel[0] + 0.5) * this.escala, (posicion_nivel[1] + 0.5) * this.escala, 7 * this.escala, 11 * this.escala, 10);
         fill(0);
-        textSize(0.9*this.escala);
+        textSize(0.9 * this.escala);
         textStyle(NORMAL);
-        text('LEVEL' + '\n\n10',(posicion_nivel[0]+0.8)*this.escala,(posicion_nivel[1]+1.5)*this.escala, 8*this.escala,7.5*this.escala);
-        text('SPEED' + '\n\nMED',(posicion_nivel[0]+0.8)*this.escala,(posicion_nivel[1]+5)*this.escala, 8*this.escala,7.5*this.escala);
-        text('VIRUS' + '\n\n36',(posicion_nivel[0]+0.8)*this.escala,(posicion_nivel[1]+8.5)*this.escala, 8*this.escala,7.5*this.escala);
+        text('LEVEL' + '\n\n10', (posicion_nivel[0] + 0.8) * this.escala, (posicion_nivel[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('SPEED' + '\n\nMED', (posicion_nivel[0] + 0.8) * this.escala, (posicion_nivel[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('VIRUS' + '\n\n36', (posicion_nivel[0] + 0.8) * this.escala, (posicion_nivel[1] + 8.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
     }
 
-    animacion_mario(posicion,estado){
+    animacion_mario(posicion, estado) {
         fill(0);
         stroke('#f7be39');
-        rect(posicion[0]*this.escala,posicion[1]*this.escala, 7*this.escala,7*this.escala,20);
-        if(estado == 0){
-            image(mario_pildora_1, (posicion[0]+1)*this.escala,(posicion[1]+1.5)*this.escala, 5*this.escala, 5*this.escala);
-        }else 
-        {
-            image(mario_pildora_2, (posicion[0]+1)*this.escala,(posicion[1]+1.5)*this.escala, 5*this.escala, 5*this.escala);    
+        rect(posicion[0] * this.escala, posicion[1] * this.escala, 7 * this.escala, 7 * this.escala, 20);
+        if (estado == 0) {
+            image(mario_pildora_1, (posicion[0] + 1) * this.escala, (posicion[1] + 1.5) * this.escala, 5 * this.escala, 5 * this.escala);
+        } else {
+            image(mario_pildora_2, (posicion[0] + 1) * this.escala, (posicion[1] + 1.5) * this.escala, 5 * this.escala, 5 * this.escala);
         }
 
     }
-    lupa_virus(posicion, virus_pos){
-     
+    lupa_virus(posicion, virus_pos) {
+
         //dibujando el lente de la lupa
         fill('#737573');
         strokeWeight(3);
         stroke(0)
-        circle(posicion[0]*this.escala,posicion[1]*this.escala,10*this.escala);
+        circle(posicion[0] * this.escala, posicion[1] * this.escala, 10 * this.escala);
         fill('#5a96ff');
-        circle(posicion[0]*this.escala,posicion[1]*this.escala,9.2*this.escala);
+        circle(posicion[0] * this.escala, posicion[1] * this.escala, 9.2 * this.escala);
 
-       //dibujar virus
-       //translate(Math.sin(second())*tablero.escala,Math.cos(second())*tablero.escala);
-        for(let i =0; i< this.virus.length;i++){
-            
+        //dibujar virus
+        //translate(Math.sin(second())*tablero.escala,Math.cos(second())*tablero.escala);
+        for (let i = 0; i < this.virus.length; i++) {
+
             //rotate(PI / 180*120);
             //imageMode(CENTER);
             switch (this.virus[i]) {
                 case 1:
-                    image(virus_sprites[i*3],virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,3.5*tablero.escala,3.5*tablero.escala);
+                    image(virus_sprites[i * 3], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 3.5 * tablero.escala, 3.5 * tablero.escala);
                     break;
                 case 2:
-                    image(virus_sprites[(i*3)+1]+'muriendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    image(virus_sprites[(i * 3) + 1] + 'muriendo', virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
                     break;
                 case 3:
-                    image(virus_sprites[(i*3)+2]+'riendo',virus_pos[i][0]*tablero.escala,virus_pos[i][1]*tablero.escala,4.5*tablero.escala,5*tablero.escala);
+                    image(virus_sprites[(i * 3) + 2] + 'riendo', virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
                     break;
-            
+
                 default:
                     break;
             }
-            
+
         }
 
     }
 
-    generarVirus(){
+    generarVirus() {
         let maxFila;
 
-        switch(this.nivel){
+        switch (this.nivel) {
             default:
                 maxFila = 6;
                 break;
@@ -165,55 +164,73 @@ class Tablero {
                 break;
         }
 
-        for(let i = 1; i <= this.numvirus; i++){
+        for (let i = 1; i <= this.numvirus; i++) {
             let vx = Math.floor(random(0, this.casillas[0].length));
             let vy = Math.floor(random(maxFila, this.casillas.length));
-            
-            if(this.casillas[vy][vx][0] != 'blank'){
+
+            if (this.casillas[vy][vx][0] != 'blank') {
                 vx = Math.floor(random(0, this.casillas[0].length));
-                vy = Math.floor(random(maxFila, this.casillas.length)); 
+                vy = Math.floor(random(maxFila, this.casillas.length));
             }
 
             let color = random(colores);
             this.casillas[vy].splice(vx, 1, ['Virus', color[0], color[1]]);
 
-            print('new virus en: ' + vx + ', ' + vy);
-            print(this.casillas[vy][vx][0]);
         }
     }
 
-    verificar_lineas(){
-        for(let i = 0; i < this.casillas.length; i++){
+    verificar_lineas() {
+        for (let i = 0; i < this.casillas.length; i++) {
             let pastillasconsecutivasX = 1;
-            let pastillasconsecutivasY = 1;
-            for(let j = 0; j < this.casillas[0].length - 2; j++){   
-                if((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][0] == this.casillas[i][j + 1][0])){
+            let deletioncoordinateX;
+            for (let j = 0; j < this.casillas[0].length - 1; j++) {
+                if ((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][1] == this.casillas[i][j + 1][1])) {
                     pastillasconsecutivasX += 1;
+                    if (pastillasconsecutivasX == 2) {
+                        deletioncoordinateX = j;
+                    }
                 }
             }
 
-            for(let j = 0; j < this.casillas[0].length; j++){
-                
+            if (pastillasconsecutivasX >= 4) {
+                //print('deletion coordinateX: ' + deletioncoordinateX + ' deletion coordinate y: ' + i);
+                print('pastillasC en X: ' + pastillasconsecutivasX);
+                for (let z = 0; z < pastillasconsecutivasX; z++) {
+                    this.casillas[i].splice(deletioncoordinateX + z, 1, ['deleted', 'none', '#ffffff']);
+                }
+            }
+        }
+
+        for (let j = 0; j < this.casillas[0].length; j++) {
+            let pastillasconsecutivasY = 1;
+            let deletioncoordinateY;
+            for (let i = 0; i < this.casillas.length - 1; i++) {
+                if ((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][1] == this.casillas[i + 1][j][1])) {
+                    pastillasconsecutivasY += 1;
+                    if (pastillasconsecutivasY == 2) {
+                        deletioncoordinateY = i;
+                    }
+                }
             }
 
-            if(pastillasconsecutivasX >= 4){
-                print(true);
+            if(pastillasconsecutivasY >= 4){
+                //print(true);
+                for(let z = 0; z < pastillasconsecutivasY; z++){
+                    this.casillas[deletioncoordinateY + z].splice(j, 1, ['deleted', 'none', '#ffffff']);
+                }
             }
         }
     }
 
-    /*nitro() {
-        if (tablero.estado != 1) {
-            return false;
+    eliminarpildoras(){
+        for (let i = 0; i < this.casillas.length; i++) {
+            for (let j = 0; j < this.casillas[0].length; j++) {
+                if(this.casillas[i][j][0] == 'deleted'){
+                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
+                }
+            }
         }
-        let flag = true;
-        while (flag) {
-            flag = figura.mover(0, +1);
-        }
-        tablero.verificar_colisiones(1);
-        figura.vida = 0;
-        return true;
-    }*/
+    }
 
     informacion() {
         //informacion del jugador

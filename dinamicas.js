@@ -64,6 +64,9 @@ function juego() {
   tablero.animacion_mario([23, 8], 0);
 
   //se verifica que no se pueda mover la figura hacia abajo
+  if(frameCount % (32 + 1) == 0){
+    tablero.eliminarpildoras();
+  }
   if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
     if (!tablero.actualizaroterminar()) {
       //tablero.estado = 3;
