@@ -53,10 +53,11 @@ function espera() {
 
 function juego() {
 
-  tablero.background_draw('#44049c', '#040404')
+  tablero.background_draw('#44049c', '#040404');
+  tablero.dibujar_marco(12, 5, 10, 22);
   tablero.dibujar();
   figura.dibujar();
-  tablero.dibujar_marco(12, 5, 10, 22);
+  
 
   //elementos del talbero
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
@@ -159,6 +160,16 @@ function preload() {
 
 
   //virus
+  tablero_sprites =  {
+    'virus_amarillo' : loadGif('img/amarillo/virus.gif'),
+    'virus_azul':  loadGif('img/azul/virus.gif'),
+    'virus_rojo':  loadGif('img/rojo/virus.gif'),
+
+    'pildora_azul':  loadGif('img/azul/caminando.gif'),
+    //'virus_azul':  loadGif('img/azul/caminando.gif'),
+    //'virus_azul':  loadGif('img/azul/caminando.gif'),
+  }
+  //animaciones para la lupa
   virus_sprites = [
 
     virus_azul_caminado = loadGif('img/azul/caminando.gif'),

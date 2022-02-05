@@ -34,9 +34,24 @@ class Tablero {
     dibujar() {
         for (let i = 0; i < this.casillas.length; i++) {
             for (let x = 0; x < this.casillas[i].length; x++) {
+                
+                switch (this.casillas[i][x][0]) {
+                    case 'Virus':
+                        image(tablero_sprites['virus_'+this.casillas[i][x][1]],(this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala,this.escala);
+                        break;
+                    case 'blank':
+                        fill(this.casillas[i][x][2]);
+                        rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
+                        break;
+                    case 'pastilla':
+                        fill(this.casillas[i][x][2]);
+                        rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
 
-                fill(this.casillas[i][x][2]);
-                rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
 
