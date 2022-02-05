@@ -9,8 +9,9 @@ class Tablero {
         this.volumen = 0.3;
         this.nivel = 1;
         this.lineas = 0;
-        this.numvirus = (this.nivel - 1) * 4 + 4;
-        //organización casillas: [tipo, color, relleno, roto (true)/no roto (false)]
+        this.numvirusini = (this.nivel - 1) * 4 + 4;
+        this.numvirus = this.numvirusini;
+        //organización casillas: [tipo, color, relleno, aqui irán las condiciones de estar roto, probablemente un array o algo]
         this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#000000', false]);
         this.generarVirus();
 
@@ -164,7 +165,7 @@ class Tablero {
                 break;
         }
 
-        for (let i = 1; i <= this.numvirus; i++) {
+        for (let i = 1; i <= this.numvirusini; i++) {
             let vx = Math.floor(random(0, this.casillas[0].length));
             let vy = Math.floor(random(maxFila, this.casillas.length));
 
@@ -196,6 +197,7 @@ class Tablero {
                 //print('deletion coordinateX: ' + deletioncoordinateX + ' deletion coordinate y: ' + i);
                 print('pastillasC en X: ' + pastillasconsecutivasX);
                 for (let z = 0; z < pastillasconsecutivasX; z++) {
+                    if(this.casillas[i][j][0] == 'virus'){this.numvirus -= 1;}
                     this.casillas[i].splice(deletioncoordinateX + z, 1, ['deleted', 'none', '#ffffff']);
                 }
             }
