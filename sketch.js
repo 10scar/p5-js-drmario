@@ -29,7 +29,7 @@ function setup() {
 
   
   responsive(tamaño);
-  
+  angleMode(DEGREES);
   let cnv =createCanvas(tamaño.width, tamaño.height);
   fondo = color(50,50,50,50);
   if (Math.min(tamaño.width, tamaño.height) >= 628) {

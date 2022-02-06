@@ -165,9 +165,18 @@ function preload() {
     'virus_azul':  loadGif('img/azul/virus.gif'),
     'virus_rojo':  loadGif('img/rojo/virus.gif'),
 
-    'pildora_azul':  loadGif('img/azul/caminando.gif'),
-    //'virus_azul':  loadGif('img/azul/caminando.gif'),
-    //'virus_azul':  loadGif('img/azul/caminando.gif'),
+    'pildora_amarillo_1':  loadImage('img/pildora/amarillo/1.png'),
+    'pildora_amarillo_2':  loadImage('img/pildora/amarillo/2.png'),
+    'pildora_amarillo_3':  loadImage('img/pildora/amarillo/3.png'),
+
+    'pildora_azul_1':  loadImage('img/pildora/azul/1.png'),
+    'pildora_azul_2':  loadImage('img/pildora/azul/2.png'),
+    'pildora_azul_3':  loadImage('img/pildora/azul/3.png'),
+
+    'pildora_rojo_1':  loadImage('img/pildora/rojo/1.png'),
+    'pildora_rojo_2':  loadImage('img/pildora/rojo/2.png'),
+    'pildora_rojo_3':  loadImage('img/pildora/rojo/3.png'),
+
   }
   //animaciones para la lupa
   virus_sprites = [

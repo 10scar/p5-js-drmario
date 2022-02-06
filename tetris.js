@@ -61,11 +61,23 @@ class Ficha {
   dibujar() {
     //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado
     //y lo llena del color correspondiente
+    let count = 0;
     for (let i = 0; i < this.forma[this.rotacion].length; i++) {
       for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
         if (this.forma[this.rotacion][i][j] != 'blank') {
           fill(this.forma[this.rotacion][i][j][1]);
-          square(j * this.escala + this.x, i * this.escala + this.y, this.escala);
+          push();
+          
+          count++;
+          if(this.rotacion == 1|| this.rotacion == 3){
+            translate((j+1) * this.escala + this.x , i * this.escala + this.y);
+            rotate(90);
+          }else{
+            translate(j * this.escala + this.x, i * this.escala + this.y);
+          };
+          image(tablero_sprites['pildora_'+this.forma[this.rotacion][i][j][0]+'_'+count],0,0, this.escala,this.escala);
+          //square(j * this.escala + this.x, i * this.escala + this.y, this.escala);
+          pop();
         }
       }
     }

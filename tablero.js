@@ -12,7 +12,7 @@ class Tablero {
         this.numvirusini = (this.nivel - 1) * 4 + 4;
         this.numvirus = this.numvirusini;
         //organización casillas: [tipo, color, relleno, aqui irán las condiciones de estar roto, probablemente un array o algo]
-        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', '#000000', false]);
+        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco',0, false]);
         this.generarVirus();
 
 
@@ -40,12 +40,17 @@ class Tablero {
                         image(tablero_sprites['virus_'+this.casillas[i][x][1]],(this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala,this.escala);
                         break;
                     case 'blank':
-                        fill(this.casillas[i][x][2]);
+                        fill(0);
                         rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
                         break;
                     case 'pastilla':
+                        if(!this.casillas[i][x][3]){
+
+                        }else{
+                            image(tablero_sprites['pildora_'+this.casillas[i][x][1]]+'_3',(this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala,this.escala);
+                        }
                         fill(this.casillas[i][x][2]);
-                        rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
+                        //rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
 
                         break;
                     default:
