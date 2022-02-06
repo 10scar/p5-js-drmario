@@ -85,12 +85,24 @@ class Tablero {
                 if (figura.forma[figura.rotacion][i][j] != 'blank') {
                     //parte pildora indica dónde está posicionada la parte especifica de la pildora
                     //relativa a si misma
-                    //0: izquierda
-                    //1: derecha
-                    //2: arriba
-                    //3: abajo
-                    let partepildora = (2 * figura.forma[figura.rotacion].length) + j;
-                    print(partepildora);
+                    //i: izquierda
+                    //d: derecha
+                    //ar: arriba
+                    //ab: abajo
+                    let partepildora;
+                    if(figura.forma[figura.rotacion].length == 1){
+                        if(j == 0){
+                            partepildora = 'i';
+                        } else {
+                            partepildora = 'd';
+                        }
+                    } else {
+                        if(i == 0){
+                            partepildora = 'ar';
+                        } else {
+                            partepildora = 'ab';
+                        }
+                    }
                     this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1], false, partepildora]);
                 }
             }
@@ -137,6 +149,7 @@ class Tablero {
         }
 
     }
+    
     lupa_virus(posicion, virus_pos) {
 
         //dibujando el lente de la lupa
@@ -265,13 +278,50 @@ class Tablero {
                 }
             }
         }
+
+        for(let i = 0; i < this.casillas[0].length; i++){
+            for (let j = 0; j < this.casillas[0].length - 1; j++) {
+                if (this.casillas[i][j][3] == false){
+                    let direction = this.casillas[i][j][4];
+                    switch(direction){
+                        default:
+                            break;
+                        case 'i':
+                            if(this.casillas[i][j + 1][0] == 'none'){
+                                print('i is happening');
+                                this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                        case 'd':
+                            if(this.casillas[i][j - 1][0] == 'none'){
+                                this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                        case 'ar':
+                            if(this.casillas[i + 1][j][0] == 'none'){
+                                this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                        case 'ab':
+                            if(this.casillas[i + 1][j][0] == 'none'){
+                                this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     eliminarpildoras() {
         for (let i = 0; i < this.casillas.length; i++) {
             for (let j = 0; j < this.casillas[0].length; j++) {
                 if (this.casillas[i][j][0] == 'deleted') {
-                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
+                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', 'none']);
+                }
+                if(this.casillas[i][j][3] == true){
+                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#FFFFFF', 'none']);
+                    //this.casillas[i][j].splice(2, 1, '#FFFFFF');
                 }
             }
         }
@@ -293,7 +343,7 @@ class Tablero {
         this.puntuacion = 0;
         this.lineas = 0;
 
-        this.casillas = this.array2d(this.casillas.length, this.casillas[0].length, ['blank', 'blanco', '#000000', false]);
+        this.casillas = this.array2d(this.casillas.length, this.casillas[0].length, ['blank', 'blanco', '#000000', 'none']);
         this.generarVirus();
     }
 
