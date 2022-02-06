@@ -82,6 +82,7 @@ function juego() {
 
   gravedad(0);
   tablero.verificar_lineas();
+  tablero.romperpildoras();
 
 }
 

@@ -12,7 +12,7 @@ class Tablero {
         this.numvirusini = (this.nivel - 1) * 4 + 4;
         this.numvirus = this.numvirusini;
         //organización casillas: [tipo, color, relleno, aqui irán las condiciones de estar roto, probablemente un array o algo]
-        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco',0, false]);
+        this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', 0, false]);
         this.generarVirus();
 
 
@@ -34,20 +34,20 @@ class Tablero {
     dibujar() {
         for (let i = 0; i < this.casillas.length; i++) {
             for (let x = 0; x < this.casillas[i].length; x++) {
-                
+
                 switch (this.casillas[i][x][0]) {
                     case 'Virus':
-                        image(tablero_sprites['virus_'+this.casillas[i][x][1]],(this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala,this.escala);
+                        image(tablero_sprites['virus_' + this.casillas[i][x][1]], (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
                         break;
                     case 'blank':
                         fill(0);
                         rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
                         break;
                     case 'pastilla':
-                        if(!this.casillas[i][x][3]){
-
-                        }else{
-                            image(tablero_sprites['pildora_'+this.casillas[i][x][1]]+'_3',(this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala,this.escala);
+                        if (!this.casillas[i][x][3]) {
+                            
+                        } else {
+                            image(tablero_sprites['pildora_' + this.casillas[i][x][1]] + '_3', (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
                         }
                         fill(this.casillas[i][x][2]);
                         rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
@@ -56,7 +56,7 @@ class Tablero {
                     default:
                         break;
                 }
-                
+
             }
         }
 
@@ -82,31 +82,30 @@ class Tablero {
 
         for (let i = 0; i < figura.forma[figura.rotacion].length; i++) {
             for (let j = 0; j < figura.forma[figura.rotacion][i].length; j++) {
-                if (figura.forma[figura.rotacion][i][j] != 'blank') {
-                    //parte pildora indica dónde está posicionada la parte especifica de la pildora
-                    //relativa a si misma
-                    //i: izquierda
-                    //d: derecha
-                    //ar: arriba
-                    //ab: abajo
-                    let partepildora;
-                    if(figura.forma[figura.rotacion].length == 1){
-                        if(j == 0){
-                            partepildora = 'i';
-                        } else {
-                            partepildora = 'd';
-                        }
+                //parte pildora indica dónde está posicionada la parte especifica de la pildora
+                //relativa a si misma
+                //i: izquierda
+                //d: derecha
+                //ar: arriba
+                //ab: abajo
+                let partepildora;
+                if (figura.forma[figura.rotacion].length == 1) {
+                    if (j == 0) {
+                        partepildora = 'i';
                     } else {
-                        if(i == 0){
-                            partepildora = 'ar';
-                        } else {
-                            partepildora = 'ab';
-                        }
+                        partepildora = 'd';
                     }
-                    this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1], false, partepildora]);
+                } else {
+                    if (i == 0) {
+                        partepildora = 'ar';
+                    } else {
+                        partepildora = 'ab';
+                    }
                 }
+                this.casillas[figura.relposY + i - this.posicion[1]].splice(figura.relposX + j - this.posicion[0], 1, ['pastilla', figura.forma[figura.rotacion][i][j][0], figura.forma[figura.rotacion][i][j][1], false, partepildora]);
             }
         }
+
 
 
         return true;
@@ -149,7 +148,7 @@ class Tablero {
         }
 
     }
-    
+
     lupa_virus(posicion, virus_pos) {
 
         //dibujando el lente de la lupa
@@ -245,7 +244,7 @@ class Tablero {
             if (pastillasconsecutivasX >= 4) {
                 for (let z = 0; z < pastillasconsecutivasX; z++) {
                     if (this.casillas[i][z][0] == 'virus') { this.numvirus -= 1; }
-                    this.casillas[i].splice(deletioncoordinateX + z, 1, ['deleted', 'none', '#ffffff']);
+                    this.casillas[i].splice(deletioncoordinateX + z, 1, ['deleted', 'none', '#ffffff', false]);
                 }
             }
         }
@@ -274,54 +273,60 @@ class Tablero {
             if (pastillasconsecutivasY >= 4) {
                 for (let z = 0; z < pastillasconsecutivasY; z++) {
                     if (this.casillas[z][j][0] == 'virus') { this.numvirus -= 1; }
-                    this.casillas[deletioncoordinateY + z].splice(j, 1, ['deleted', 'none', '#ffffff']);
+                    this.casillas[deletioncoordinateY + z].splice(j, 1, ['blank', 'none', '#ffffff', false]);
                 }
             }
         }
 
-        for(let i = 0; i < this.casillas[0].length; i++){
-            for (let j = 0; j < this.casillas[0].length - 1; j++) {
-                if (this.casillas[i][j][3] == false){
-                    let direction = this.casillas[i][j][4];
-                    switch(direction){
-                        default:
-                            break;
-                        case 'i':
-                            if(this.casillas[i][j + 1][0] == 'none'){
-                                print('i is happening');
-                                this.casillas[i][j].splice(3, 1, true);
-                            }
-                            break;
-                        case 'd':
-                            if(this.casillas[i][j - 1][0] == 'none'){
-                                this.casillas[i][j].splice(3, 1, true);
-                            }
-                            break;
-                        case 'ar':
-                            if(this.casillas[i + 1][j][0] == 'none'){
-                                this.casillas[i][j].splice(3, 1, true);
-                            }
-                            break;
-                        case 'ab':
-                            if(this.casillas[i + 1][j][0] == 'none'){
-                                this.casillas[i][j].splice(3, 1, true);
-                            }
-                            break;
-                    }
-                }
-            }
-        }
     }
 
     eliminarpildoras() {
         for (let i = 0; i < this.casillas.length; i++) {
             for (let j = 0; j < this.casillas[0].length; j++) {
                 if (this.casillas[i][j][0] == 'deleted') {
-                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', 'none']);
+                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
                 }
-                if(this.casillas[i][j][3] == true){
-                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#FFFFFF', 'none']);
-                    //this.casillas[i][j].splice(2, 1, '#FFFFFF');
+                /*if (this.casillas[i][j][4] == true) {
+                    this.casillas[i][j].splice(2, 1, '#ffffff');
+                }*/
+            }
+        }
+
+    }
+
+    romperpildoras() {
+        for (let i = 0; i < this.casillas.length; i++) {
+            for (let j = 0; j < this.casillas[0].length; j++) {
+                if (this.casillas[i][j][0] == 'pastilla' & this.casillas[i][j][3] == false) {
+                    let direction = this.casillas[i][j][4];
+                    switch (direction) {
+                        default:
+                            break;
+                        case 'i':
+                            if (this.casillas[i][j + 1][0] == 'blank') {
+                                print('i is happening(' + j + ', ' + i + ')');
+                                //this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                        case 'd':
+                            if(this.casillas[i][j - 1][0] == 'blank'){
+                                print('d is happening(' + j + ', ' + i +')');
+                                //this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                        case 'ar':
+                            if(this.casillas[i + 1][j][0] == 'blank'){
+                                print('ar is happening(' + j + ', ' + i +')');
+                                //this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                        case 'ab':
+                            if(this.casillas[i - 1][j][0] == 'blank'){
+                                print('ar is happening(' + j + ', ' + i +')');
+                                //this.casillas[i][j].splice(3, 1, true);
+                            }
+                            break;
+                    }
                 }
             }
         }
