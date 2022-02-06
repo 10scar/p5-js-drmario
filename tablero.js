@@ -5,7 +5,7 @@ class Tablero {
         this.background = [32, 30];
         this.posicion = [posx, posy];
         this.virus = [1, 1, 1];
-        this.estado = 1;
+        this.estado = 4;
         this.volumen = 0.3;
         this.nivel = 1;
         this.lineas = 0;

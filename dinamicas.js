@@ -18,6 +18,10 @@ function dinamicas() {
       game_over();
       break;
 
+    case 4:
+      menu();
+      break;
+
     default:
       break;
   }
