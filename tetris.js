@@ -174,10 +174,8 @@ class Ficha {
       this.x = this.relposX * this.escala;
       this.y = this.relposY * this.escala;
 
-      print(this.color1);
       this.color1 = random(colores);
       this.color2 = random(colores);
-      print(this.color1);
 
       this.forma = [
         [[this.color1, this.color2]],
