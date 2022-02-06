@@ -50,7 +50,7 @@ class Tablero {
                             image(tablero_sprites['pildora_'+this.casillas[i][x][1]]+'_3',(this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala,this.escala);
                         }
                         fill(this.casillas[i][x][2]);
-                        //rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
+                        rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
 
                         break;
                     default:
