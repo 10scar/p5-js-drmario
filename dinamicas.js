@@ -57,7 +57,7 @@ function juego() {
   tablero.dibujar_marco(12, 5, 10, 22);
   tablero.dibujar();
   figura.dibujar();
-  
+
 
   //elementos del talbero
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
@@ -65,7 +65,7 @@ function juego() {
   tablero.animacion_mario([23, 8], 0);
 
   //se verifica que no se pueda mover la figura hacia abajo
-  if(frameCount % (32 + 1) == 0){
+  if (frameCount % (32 + 1) == 0) {
     tablero.eliminarpildoras();
   }
   if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
@@ -80,23 +80,22 @@ function juego() {
 
   }
 
-  gravedad(0);
+  gravedad();
   tablero.verificar_lineas();
   tablero.romperpildoras();
 
 }
 
-function gravedad(type) {
-  switch(type){
-    case 0:
-      if (frameCount % 32 == 0) {
-        figura.mover(0, 1);
-      }
-      break;
-    case 1:
-
-    break;
+function gravedad() {
+  if (frameCount % 32 == 0) {
+    figura.mover(0, 1);
   }
+  if (frameCount % 4 == 0) {
+    tablero.bajarpildorasrotas();
+  }
+
+
+
 }
 
 function inicio() {
@@ -161,22 +160,22 @@ function preload() {
 
 
   //virus
-  tablero_sprites =  {
-    'virus_amarillo' : loadGif('img/amarillo/virus.gif'),
-    'virus_azul':  loadGif('img/azul/virus.gif'),
-    'virus_rojo':  loadGif('img/rojo/virus.gif'),
+  tablero_sprites = {
+    'virus_amarillo': loadGif('img/amarillo/virus.gif'),
+    'virus_azul': loadGif('img/azul/virus.gif'),
+    'virus_rojo': loadGif('img/rojo/virus.gif'),
 
-    'pildora_amarillo_1':  loadImage('img/pildora/amarillo/1.png'),
-    'pildora_amarillo_2':  loadImage('img/pildora/amarillo/2.png'),
-    'pildora_amarillo_3':  loadImage('img/pildora/amarillo/3.png'),
+    'pildora_amarillo_1': loadImage('img/pildora/amarillo/1.png'),
+    'pildora_amarillo_2': loadImage('img/pildora/amarillo/2.png'),
+    'pildora_amarillo_3': loadImage('img/pildora/amarillo/3.png'),
 
-    'pildora_azul_1':  loadImage('img/pildora/azul/1.png'),
-    'pildora_azul_2':  loadImage('img/pildora/azul/2.png'),
-    'pildora_azul_3':  loadImage('img/pildora/azul/3.png'),
+    'pildora_azul_1': loadImage('img/pildora/azul/1.png'),
+    'pildora_azul_2': loadImage('img/pildora/azul/2.png'),
+    'pildora_azul_3': loadImage('img/pildora/azul/3.png'),
 
-    'pildora_rojo_1':  loadImage('img/pildora/rojo/1.png'),
-    'pildora_rojo_2':  loadImage('img/pildora/rojo/2.png'),
-    'pildora_rojo_3':  loadImage('img/pildora/rojo/3.png'),
+    'pildora_rojo_1': loadImage('img/pildora/rojo/1.png'),
+    'pildora_rojo_2': loadImage('img/pildora/rojo/2.png'),
+    'pildora_rojo_3': loadImage('img/pildora/rojo/3.png'),
 
   }
   //animaciones para la lupa
