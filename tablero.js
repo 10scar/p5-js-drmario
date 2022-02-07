@@ -15,7 +15,7 @@ class Tablero {
 
         this.nivel = 1;
         this.numvirusini = (this.nivel - 1) * 4 + 4;
-        this.numvirusporcolor = [0,0,0];
+        this.numvirusporcolor = [0, 0, 0];
         this.numvirus = this.numvirusini;
 
 
@@ -103,6 +103,12 @@ class Tablero {
             arr[i] = new Array(x).fill(z);
         }
         return arr
+    }
+
+    condicionganar() {
+        if (this.numvirus == 0) {
+            return true;
+        }
     }
 
     actualizaroterminar() {
@@ -211,7 +217,7 @@ class Tablero {
                 case 0:
                     image(virus_sprites[(i * 3) + 1], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
                     this.contadorparaanimaciones++;
-                    if(this.contadorparaanimaciones == 20){
+                    if (this.contadorparaanimaciones == 20) {
                         this.contadorparaanimaciones = 0;
                         this.virus.splice(i, 1, -1);
                         this.numvirusporcolor.splice(i, 1, -1);
@@ -223,7 +229,7 @@ class Tablero {
                 case 2:
                     image(virus_sprites[(i * 3) + 1], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
                     this.contadorparaanimaciones++;
-                    if(this.contadorparaanimaciones == 30){
+                    if (this.contadorparaanimaciones == 30) {
                         this.contadorparaanimaciones = 0;
                         this.virus.splice(i, 1, 1);
                     }
@@ -289,13 +295,12 @@ class Tablero {
                     if (this.casillas[i][j][1] == 'rojo') {
                         this.numvirusporcolor[1] += 1;
                     }
-            }
+                }
             }
         }
 
-        for(let i = 0; i < this.virus.length; i++){
-            if(this.numvirusporcolor[i] == 0){
-                print('this other thing is happenning');
+        for (let i = 0; i < this.virus.length; i++) {
+            if (this.numvirusporcolor[i] == 0) {
                 this.virus.splice(i, 1, -1);
                 this.numvirusporcolor.splice(i, 1, -1);
             }
@@ -319,14 +324,14 @@ class Tablero {
                     if (this.casillas[i][j][1] == 'rojo') {
                         numvirusred += 1;
                     }
-            }
+                }
             }
         }
 
         let numviruscolores = [numvirusblue, numvirusred, numvirusyellow];
 
         for (let i = 0; i < numviruscolores.length; i++) {
-            if(this.numvirusporcolor[i] == -1){
+            if (this.numvirusporcolor[i] == -1) {
                 continue;
             }
 
@@ -334,14 +339,13 @@ class Tablero {
                 this.virus.splice(i, 1, 0);
             }
 
-            if (numviruscolores[i] < this.numvirusporcolor[i]){
-                print(this.numvirusporcolor[i]);
+            if (numviruscolores[i] < this.numvirusporcolor[i]) {
                 this.virus.splice(i, 1, 2);
             }
 
             this.numvirusporcolor[i] = numviruscolores[i];
 
-            
+
         }
 
         this.numvirus = numvirusblue + numvirusred + numvirusyellow;
@@ -373,9 +377,9 @@ class Tablero {
                     this.puntuacion += 3200 * this.nivel;
                     break;
             }
-            print(this.puntuacion);
 
             this.numvirusini = this.numvirus;
+            //print(this.numvirus);
 
         }
     }
@@ -403,7 +407,7 @@ class Tablero {
 
             if (pastillasconsecutivasX >= 4) {
                 for (let z = 0; z < pastillasconsecutivasX; z++) {
-                    this.casillas[i].splice(deletioncoordinateX + z, 1, ['deleted', 'none', '#ffffff', false]);
+                    this.casillas[i].splice(deletioncoordinateX + z, 1, ['blank', 'none', '#ffffff', false]);
                 }
             }
         }
@@ -489,10 +493,16 @@ class Tablero {
     bajarpildorasrotas() {
         for (let i = this.casillas.length - 2; i >= 0; i--) {
             for (let j = 0; j < this.casillas[0].length; j++) {
+                
+            }
+        }
+
+        for (let i = this.casillas.length - 2; i >= 0; i--) {
+            for (let j = 0; j < this.casillas[0].length; j++) {
                 if (this.casillas[i][j][3] == true & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
                     this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
-                    this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
-                } else if (this.casillas[i][j][3] == false & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
+                    this.casillas[i].splice(j, 1, ['blank1', 'blanco', '#000000', false]);
+                }else if (this.casillas[i][j][3] == false & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
                     let willfall = false;
                     switch (this.casillas[i][j][4]) {
                         default:
@@ -508,7 +518,7 @@ class Tablero {
                             }
                             break;
                         case 'ar':
-                            if (this.casillas[i + 2][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1') {
+                            if (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1') {
                                 willfall = true;
                             }
                             break;
@@ -526,7 +536,6 @@ class Tablero {
             }
         }
     }
-
 
     restablecer(nivel = 1) {
         this.nivel = nivel;
