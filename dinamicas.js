@@ -42,11 +42,11 @@ function game_over() {
 
   }*/
 
-  tablero.informacion();
+  //tablero.informacion();
   fill(0, 200, 0);
   textSize(1.5 * tablero.escala);
-  jugar.locate(2 * tablero.escala, 1 * tablero.escala);
-  jugar.draw();
+  //jugar.locate(2 * tablero.escala, 1 * tablero.escala);
+  //jugar.draw();
   text("GAME OVER", 1.5 * tablero.escala, 12 * tablero.escala);
 }
 
@@ -75,23 +75,18 @@ function juego() {
   figura.siguiente();
 
   //se verifica que no se pueda mover la figura hacia abajo
-  if (frameCount % ((32/tablero.speed) + 1) == 0) {
-    tablero.eliminarpildoras();
-  }
   if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
     if (!tablero.actualizaroterminar()) {
-      //tablero.estado = 3;
+      tablero.estado = 3;
     } else {
       figura.vida = 0;
-
+      figura.reiniciar();
+      tablero.estado =5;
     }
-
-    figura.reiniciar();
-    tablero.estado =5;
-
   }
 
   tablero.romperpildoras();
+  tablero.eliminarblanks();
   tablero.verificar_lineas();
   tablero.actualizarpuntaje();
   gravedad();

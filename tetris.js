@@ -11,7 +11,7 @@ fisicas ={
 ///en construccion.
 class Ficha {
 
-  constructor(rotacion = 1, escala = 100) {
+  constructor(rotacion = 0, escala = 100) {
     this.escala = escala;
     this.rotacion = rotacion;
     this.vida = 0;
@@ -239,7 +239,6 @@ class Ficha {
     }
     return this.rotacion;
   }
-
   lanzar(){
     let x,y;
     //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado

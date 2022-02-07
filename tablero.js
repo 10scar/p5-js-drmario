@@ -426,10 +426,10 @@ class Tablero {
 
     }
 
-    eliminarpildoras() {
+    eliminarblanks() {
         for (let i = 0; i < this.casillas.length; i++) {
             for (let j = 0; j < this.casillas[0].length; j++) {
-                if (this.casillas[i][j][0] == 'deleted') {
+                if (this.casillas[i][j][0] == 'blank1') {
                     this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
                 }
             }
