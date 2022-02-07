@@ -36,9 +36,9 @@ class Tablero {
     }
 
     dibujar() {
+        let posicion = '';
         for (let i = 0; i < this.casillas.length; i++) {
             for (let x = 0; x < this.casillas[i].length; x++) {
-
                 switch (this.casillas[i][x][0]) {
                     case 'Virus':
                         image(tablero_sprites['virus_' + this.casillas[i][x][1]], (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
@@ -48,13 +48,36 @@ class Tablero {
                         rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
                         break;
                     case 'pastilla':
-                        /*if (!this.casillas[i][x][3]) {
-                            
+                        if (this.casillas[i][x][3]) {
+                            image(tablero_sprites['pildora_' + this.casillas[i][x][1] + '_3'], (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
                         } else {
-                            image(tablero_sprites['pildora_' + this.casillas[i][x][1]] + '_3', (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
-                        }*/
-                        fill(this.casillas[i][x][2]);
-                        rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
+
+                            switch (this.casillas[i][x][4]) {
+                                case 'i':
+                                case 'ar':
+                                    posicion = '1'
+                                    break;
+                                case 'd':
+                                case 'ab':
+                                    posicion = '2';
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            push();
+                            
+
+                            if(this.casillas[i][x][4] != 'ar' && this.casillas[i][x][4] != 'ab'){
+                                translate((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
+                            }else{
+                                translate((this.escala * (x+1)) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
+                                rotate(90);
+                            }
+                            image(tablero_sprites['pildora_'+this.casillas[i][x][1]+'_'+posicion],0,0, this.escala,this.escala);
+                            pop();
+    
+                        } 
 
                         break;
                     default:
