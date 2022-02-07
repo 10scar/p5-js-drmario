@@ -2,6 +2,7 @@
 function dinamicas() {
   //config.draw();
   //casos de juego, 0,iniciar tuttorial, 1 juego, 2 pausa, 3 game over
+  console.log(figura.rotacion);
   switch (tablero.estado) {
     case 0:
       inicio();
