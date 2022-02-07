@@ -35,6 +35,22 @@ class Ficha {
     this._color2 = color;
   }
 
+  get nextcolor1() {
+    this._nextcolor1 = this._nextcolor1 == undefined ? random(colores) : this._nextcolor1
+    return this._nextcolor1;
+  }
+  set nextcolor1(color) {
+    this._nextcolor1 = color;
+  }
+
+  get nextcolor2() {
+    this._nextcolor2 = this._nextcolor2 == undefined ? random(colores) : this._nextcolor2
+    return this._nextcolor2;
+  }
+  set nextcolor2(color) {
+    this._nextcolor2 = color;
+  }
+
   forma = [
     [[this.color1, this.color2]],
     [[this.color1], [this.color2]],
@@ -175,6 +191,14 @@ class Ficha {
       this.relposY += y;
     }
     return this.tryMove(x, y);
+  }
+
+  actualizarnextfigura(){
+    this.color1 = this.nextcolor1;
+    this.color2 = this._nextcolor2;
+
+    this.nextcolor1 = random(colores);
+    this.nextcolor2 = random(colores);
   }
 
   reiniciar() {

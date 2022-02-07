@@ -60,6 +60,7 @@ function juego() {
   tablero.background_draw('#44049c', '#040404');
   tablero.dibujar_marco(12, 5, 10, 22);
   tablero.dibujar();
+  figura.actualizarnextfigura();
   figura.dibujar();
 
 
@@ -97,9 +98,6 @@ function gravedad() {
   if (frameCount % 4 == 0) {
     tablero.bajarpildorasrotas();
   }
-
-
-
 }
 
 function inicio() {

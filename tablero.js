@@ -53,7 +53,6 @@ class Tablero {
                         } else {
                             image(tablero_sprites['pildora_' + this.casillas[i][x][1]] + '_3', (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
                         }*/
-                        //print(!this.casillas[i][x][3]);
                         fill(this.casillas[i][x][2]);
                         rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
 
@@ -365,25 +364,24 @@ class Tablero {
                             break;
                         case 'i':
                             if (this.casillas[i][j + 1][0] == 'blank') {
-                                print('i is happening(' + j + ', ' + i + ')');
                                 this.casillas[i][j].splice(3, 1, true);
                             }
                             break;
                         case 'd':
                             if(this.casillas[i][j - 1][0] == 'blank'){
-                                print('d is happening(' + j + ', ' + i +')');
+
                                 this.casillas[i][j].splice(3, 1, true);
                             }
                             break;
                         case 'ar':
                             if(this.casillas[i + 1][j][0] == 'blank'){
-                                print('ar is happening(' + j + ', ' + i +')');
+
                                 this.casillas[i][j].splice(3, 1, true);
                             }
                             break;
                         case 'ab':
                             if(this.casillas[i - 1][j][0] == 'blank'){
-                                print('ar is happening(' + j + ', ' + i +')');
+
                                 this.casillas[i][j].splice(3, 1, true);
                             }
                             break;
@@ -399,6 +397,36 @@ class Tablero {
                 if (this.casillas[i][j][3] == true & this.casillas[i + 1][j][0] == 'blank') {
                     this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
                     this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
+                } else if (this.casillas[i][j][3] == false & this.casillas[i + 1][j][0] == 'blank') {
+                    let willfall = false;
+                    switch(this.casillas[i][j][4]){
+                        default:
+                            break;
+                        case 'i':
+                            if (this.casillas[i + 1][j + 1][0] == 'blank') {
+                                willfall = true;
+                            }
+                            break;
+                        case 'd':
+                            if(this.casillas[i + 1][j - 1][0] == 'blank'){
+                                willfall = true;
+                            }
+                            break;
+                        case 'ar':
+                            if(this.casillas[i + 2][j][0] == 'blank'){
+                                willfall = true;
+                            }
+                            break;
+                        case 'ab':
+                            if(this.casillas[i + 1][j][0] == 'blank'){
+                                willfall = true;
+                            }
+                            break;
+                    }
+                    if(willfall){
+                        this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
+                        this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]); 
+                    }
                 }
             }
         }
