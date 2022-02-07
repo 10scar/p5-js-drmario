@@ -76,6 +76,7 @@ Efectos de sonido obtenidos de: https://pixabay.com/sound-effects/search/game/
 
 ## Tecnologias
 
- - [P5 JS](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [P5 JS](https://p5js.org/)
  - [P5 GIF](https://github.com/antiboredom/p5.gif.js/tree/master)
+ - [P5 Clickiable](https://github.com/Lartu/p5.clickable)
 
