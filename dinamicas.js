@@ -22,6 +22,10 @@ function dinamicas() {
       menu();
       break;
 
+    case 5:
+      animacion_lanzar();
+      break;
+
     default:
       break;
   }
@@ -60,7 +64,7 @@ function juego() {
   tablero.background_draw('#44049c', '#040404');
   tablero.dibujar_marco(12, 5, 10, 22);
   tablero.dibujar();
-  figura.actualizarnextfigura();
+  //figura.actualizarnextfigura();
   figura.dibujar();
 
 
@@ -68,6 +72,7 @@ function juego() {
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
   tablero.puntuacion_jugador([0, 4], [23, 16]);
   tablero.animacion_mario([23, 8], 0);
+  figura.siguiente();
 
   //se verifica que no se pueda mover la figura hacia abajo
   if (frameCount % (32 + 1) == 0) {
@@ -82,6 +87,7 @@ function juego() {
     }
 
     figura.reiniciar();
+    tablero.estado =5;
 
   }
 
@@ -144,7 +150,25 @@ function inicio() {
 }
 
 
+function animacion_lanzar(){
 
+  tablero.background_draw('#44049c', '#040404');
+  tablero.dibujar_marco(12, 5, 10, 22);
+  tablero.dibujar();
+  figura.actualizarnextfigura();
+  
+
+  //elementos del talbero
+  tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
+  tablero.puntuacion_jugador([0, 4], [23, 16]);
+  tablero.animacion_mario([23, 8], 0);
+  figura.lanzar();
+
+  gravedad();
+  tablero.verificar_lineas();
+  tablero.romperpildoras();
+
+}
 
 function windowResized() {
  // responsive(tamaño);

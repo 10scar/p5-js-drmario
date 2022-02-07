@@ -3,7 +3,11 @@ const colores = [
   ['azul', '#0000ff'],
   ['amarillo', '#ffff00']
 ]
-
+fisicas ={
+  't' : 0, //Se inicia el tiempo a t = 0
+  'g' : 9.8, //Aceleración de gravedad
+  'rot':0
+}
 ///en construccion.
 class Ficha {
 
@@ -195,7 +199,7 @@ class Ficha {
 
   actualizarnextfigura(){
     this.color1 = this.nextcolor1;
-    this.color2 = this._nextcolor2;
+    this.color2 = this.nextcolor2;
 
     this.nextcolor1 = random(colores);
     this.nextcolor2 = random(colores);
@@ -210,8 +214,11 @@ class Ficha {
       this.x = this.relposX * this.escala;
       this.y = this.relposY * this.escala;
 
-      this.color1 = random(colores);
-      this.color2 = random(colores);
+      this.color1 = this.nextcolor1;
+    this.color2 = this.nextcolor2;
+
+    this.nextcolor1 = random(colores);
+    this.nextcolor2 = random(colores);
 
       this.forma = [
         [[this.color1, this.color2]],
@@ -235,5 +242,44 @@ class Ficha {
     return this.rotacion;
   }
 
+  lanzar(){
+    let x,y;
+    //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado
+    x =  (this.escala*25) +60 * cos(105) * fisicas['t']; 
+    y =  (this.escala*21) +60  * sin(105) * fisicas['t'] - 0.5 * fisicas['g'] * fisicas['t'] * fisicas['t']; 
+    fisicas['t'] += 0.2;
+    let count = 0;
+    for (let i = 0; i < this.forma[this.rotacion].length; i++) {
+      for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
+        if (this.forma[this.rotacion][i][j] != 'blank') {
+          fill(this.forma[this.rotacion][i][j][1]);
+          push();
+          
+          count++;
+          if(this.rotacion == 1|| this.rotacion == 3){
+            translate((j+1) * this.escala + x,i * this.escala+ (this.escala*30)-y);
+            rotate(90);
+          }else{
+            translate(j * this.escala + x,i * this.escala+ (this.escala*30)-y);
+          };
+          if( this.escala+ (this.escala*30)-y > i * this.escala + this.y){
+            fisicas['t'] = 0;
+            this.rotacion = 0;
+            tablero.estado = 1;
+          }
+          image(tablero_sprites['pildora_'+this.forma[this.rotacion][i][j][0]+'_'+count],0,0, this.escala,this.escala);
+          pop();
+          
+        }
+      }
+    }
+    this.rotacion=(second()%2);
+    
+  }
+  siguiente(){
+    let color =this.nextcolor1;
+    image(tablero_sprites['pildora_'+color[0]+'_1'],25*this.escala,9*this.escala, this.escala,this.escala);
+    image(tablero_sprites['pildora_'+this.nextcolor2[0]+'_2'],26*this.escala,9*this.escala, this.escala,this.escala);
+  }
 }
 

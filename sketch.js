@@ -27,7 +27,7 @@ function responsive(tamaño){
 
 function setup() {
 
-  
+
   responsive(tamaño);
   angleMode(DEGREES);
   let cnv =createCanvas(tamaño.escala*32, tamaño.escala*30);

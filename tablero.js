@@ -455,16 +455,6 @@ class Tablero {
         }
     }
 
-    informacion() {
-        //informacion del jugador
-        //textSize(2 * this.escala);
-        //text(jugador.nombre, 13 * this.escala, 2 * this.escala);
-        fill(255, 255, 255);
-        textSize(1 * this.escala);
-        text("Nivel :" + this.nivel, 13 * this.escala, 4 * this.escala);
-        text("Puntuación :" /*+ jugador.puntuacion*/, 13 * this.escala, 5 * this.escala);
-        //text("Lineas :" + this.lineas, 13 * this.escala, 7 * this.escala);
-    }
 
     restablecer(nivel = 1) {
         this.nivel = nivel;
