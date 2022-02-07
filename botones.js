@@ -170,10 +170,8 @@ function keyPressed() {
       tablero.nitro();
       break;
     case 67:
-      tablero.actualizaroterminar();
-      break;
-    case 88:
-      figura.reiniciar();
+      print('happening');
+      tablero.bajarpildorasrotas();
       break;
   }
 
