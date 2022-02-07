@@ -61,6 +61,7 @@ function siguiente_nivel(){
 function game_over() {
 
    //verifica musica
+   musica_2.stop(0);
    intro.setVolume(tablero.volumen);
    if(!intro.isPlaying()){
     intro.play();
@@ -208,6 +209,7 @@ function inicio() {
   textAlign(CENTER);
   text('PRESS ENTER', 10 * tablero.escala, 23 * tablero.escala, 15 * tablero.escala, 2 * tablero.escala);
   //verifica musica
+    musica_2.stop(0);
       intro.setVolume(tablero.volumen);
       if(!intro.isPlaying()){
        intro.play();
