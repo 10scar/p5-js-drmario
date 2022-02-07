@@ -161,7 +161,7 @@ function juego() {
   tablero.verificar_lineas();
   tablero.actualizarpuntaje();
   gravedad();
-  if(tablero.virus==0){
+  if(tablero.numvirus==0){
     tablero.restablecer;
     tablero.estado = 6;
     if(tablero.score > tablero.top){
