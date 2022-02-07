@@ -17,8 +17,8 @@ function responsive(tamaño){
   tamaño.height = window.screen.height;
   if (Math.min(tamaño.width, tamaño.height) >= 768) {
     tamaño.escala = (tamaño.height/38.5);
-    tamaño.width = tamaño.width/2;
-    tamaño.height = tamaño.height-170;
+ /*    tamaño.width = tamaño.width/2;
+    tamaño.height = tamaño.height-170; */
   
 }else{
   tamaño.escala = (tamaño.height/40);
@@ -30,19 +30,19 @@ function setup() {
   
   responsive(tamaño);
   angleMode(DEGREES);
-  let cnv =createCanvas(tamaño.width, tamaño.height);
+  let cnv =createCanvas(tamaño.escala*32, tamaño.escala*30);
   fondo = color(50,50,50,50);
   if (Math.min(tamaño.width, tamaño.height) >= 628) {
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
-    cnv.position(x, y);
+    //cnv.position(x, y);
   
 }
 
   tablero = new Tablero(tamaño.escala);
   figura = new Ficha(0,tamaño.escala);
   textFont(fuente);
- // botones();
+  botones_menu();
 
 }
 
@@ -54,7 +54,7 @@ function draw() {
   
   //tablero.dibujar();
   //figura.dibujar();
-  //background(fondo);
+  background(0);
   //tablero.dibujar_marco();
   //dinamicas
   dinamicas();
