@@ -149,8 +149,8 @@ function inicio() {
 
 
 function windowResized() {
-  responsive(tamaño);
-  resizeCanvas(windowWidth, windowHeight);
+ // responsive(tamaño);
+ // resizeCanvas(windowWidth, windowHeight);
 }
 
 //carga musica e imagenes
@@ -222,6 +222,19 @@ function range(x) {
 }
 
 
-
+function mouseClicked() {
+  switch (tablero.estado) {
+    case 4:
+      if(mouseX <=20*tablero.escala  && mouseX >=7.9*tablero.escala &&mouseY >=11*tablero.escala && mouseY <=13*tablero.escala ){
+        let nivel = (mouseX -8*tablero.escala)/(tablero.escala*0.6);
+        tablero.nivel = Math.round(nivel+1);
+        //alert(nivel);
+    }
+      break;
+  
+    default:
+      break;
+  }
+}
 
 
