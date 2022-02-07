@@ -74,6 +74,11 @@ function juego() {
   tablero.animacion_mario([23, 8], 0);
   figura.siguiente();
 
+  if(tablero.condicionganar()){
+    print(true);
+    tablero.estado = 3;
+  }
+
   //se verifica que no se pueda mover la figura hacia abajo
   if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
     if (!tablero.actualizaroterminar()) {

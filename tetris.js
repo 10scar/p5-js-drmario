@@ -273,6 +273,7 @@ class Ficha {
     this.rotacion=(second()%2);
     
   }
+  
   siguiente(){
     let color =this.nextcolor1;
     image(tablero_sprites['pildora_'+color[0]+'_1'],25*this.escala,9*this.escala, this.escala,this.escala);
