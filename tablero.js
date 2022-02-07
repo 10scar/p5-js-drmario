@@ -10,12 +10,14 @@ class Tablero {
         this.estado = 1;
         this.volumen = 0.3;
         this.puntuacion = 0;
+        this.contadorparaanimaciones = 0;
 
         this.nivel = 1;
         this.numvirusini = (this.nivel - 1) * 4 + 4;
+        this.numvirusporcolor = [0,0,0];
         this.numvirus = this.numvirusini;
-        
-           
+
+
         //organización casillas: [tipo, color, relleno, aqui irán las condiciones de estar roto, probablemente un array o algo]
         this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', 0, false]);
         this.generarVirus();
@@ -67,18 +69,18 @@ class Tablero {
                                     break;
                             }
                             push();
-                            
 
-                            if(this.casillas[i][x][4] != 'ar' && this.casillas[i][x][4] != 'ab'){
+
+                            if (this.casillas[i][x][4] != 'ar' && this.casillas[i][x][4] != 'ab') {
                                 translate((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
-                            }else{
-                                translate((this.escala * (x+1)) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
+                            } else {
+                                translate((this.escala * (x + 1)) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
                                 rotate(90);
                             }
-                            image(tablero_sprites['pildora_'+this.casillas[i][x][1]+'_'+posicion],0,0, this.escala,this.escala);
+                            image(tablero_sprites['pildora_' + this.casillas[i][x][1] + '_' + posicion], 0, 0, this.escala, this.escala);
                             pop();
-    
-                        } 
+
+                        }
 
                         break;
                     default:
@@ -149,8 +151,8 @@ class Tablero {
         fill(0);
         textSize(0.9 * this.escala);
         textStyle(NORMAL);
-        text('TOP' + '\n\n0000000', (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
-        text('SCORE' + '\n\n0000000', (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('TOP\n\n' + this.puntuacion, (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('SCORE\n\n' + this.puntuacion, (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
 
         ///cuadro nivel, speed, virus
         fill('#f7be39');
@@ -194,19 +196,35 @@ class Tablero {
             //rotate(PI / 180*120);
             //imageMode(CENTER);
             switch (this.virus[i]) {
+                case 0:
+                    image(virus_sprites[(i * 3) + 1], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
+                    this.contadorparaanimaciones++;
+                    if(this.contadorparaanimaciones == 20){
+                        this.contadorparaanimaciones = 0;
+                        this.virus.splice(i, 1, -1);
+                        this.numvirusporcolor.splice(i, 1, -1);
+                    }
+                    break;
                 case 1:
                     image(virus_sprites[i * 3], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 3.5 * tablero.escala, 3.5 * tablero.escala);
                     break;
                 case 2:
-                    image(virus_sprites[(i * 3) + 1] + 'muriendo', virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
+                    image(virus_sprites[(i * 3) + 1], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
+                    this.contadorparaanimaciones++;
+                    if(this.contadorparaanimaciones == 30){
+                        this.contadorparaanimaciones = 0;
+                        this.virus.splice(i, 1, 1);
+                    }
                     break;
                 case 3:
-                    image(virus_sprites[(i * 3) + 2] + 'riendo', virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
+                    image(virus_sprites[(i * 3) + 2], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
                     break;
 
                 default:
                     break;
             }
+
+
 
         }
 
@@ -246,42 +264,82 @@ class Tablero {
             this.casillas[vy].splice(vx, 1, ['Virus', color[0], color[1]]);
 
         }
+
+        for (let i = 0; i < this.casillas.length; i++) {
+            for (let j = 0; j < this.casillas[0].length; j++) {
+                if (this.casillas[i][j][0] == 'Virus') {
+                    if (this.casillas[i][j][1] == 'amarillo') {
+                        this.numvirusporcolor[2] += 1;
+                    }
+                    if (this.casillas[i][j][1] == 'azul') {
+                        this.numvirusporcolor[0] += 1;
+                    }
+                    if (this.casillas[i][j][1] == 'rojo') {
+                        this.numvirusporcolor[1] += 1;
+                    }
+            }
+            }
+        }
+
+        for(let i = 0; i < this.virus.length; i++){
+            if(this.numvirusporcolor[i] == 0){
+                print('this other thing is happenning');
+                this.virus.splice(i, 1, -1);
+                this.numvirusporcolor.splice(i, 1, -1);
+            }
+        }
     }
 
-    verificarnumvirus(){
+    verificarnumvirus() {
         let numvirusred = 0;
         let numvirusyellow = 0;
         let numvirusblue = 0;
 
-        let numviruscolores = [numvirusyellow, numvirusblue, numvirusred];
-
         for (let i = 0; i < this.casillas.length; i++) {
-            for (let j = 0; j < this.casillas[0].length - 1; j++) {
-                if(this.virus[0] == 1){
-                    numvirusyellow += 1;
-                }
-                if(this.virus[1] == 1){
-                    numvirusblue += 1;
-                }
-                if(this.numvirus[2] == 1){
-                    numvirusred += 1;
-                }
+            for (let j = 0; j < this.casillas[0].length; j++) {
+                if (this.casillas[i][j][0] == 'Virus') {
+                    if (this.casillas[i][j][1] == 'amarillo') {
+                        numvirusyellow += 1;
+                    }
+                    if (this.casillas[i][j][1] == 'azul') {
+                        numvirusblue += 1;
+                    }
+                    if (this.casillas[i][j][1] == 'rojo') {
+                        numvirusred += 1;
+                    }
+            }
             }
         }
 
-        /*for(let i = 0; i < numviruscolores.length; i++){
-            if(numviruscolores[i] == 0){
+        let numviruscolores = [numvirusblue, numvirusred, numvirusyellow];
+
+        for (let i = 0; i < numviruscolores.length; i++) {
+            if(this.numvirusporcolor[i] == -1){
+                continue;
+            }
+
+            if (numviruscolores[i] == 0) {
                 this.virus.splice(i, 1, 0);
             }
+
+            if (numviruscolores[i] < this.numvirusporcolor[i]){
+                print(this.numvirusporcolor[i]);
+                this.virus.splice(i, 1, 2);
+            }
+
+            this.numvirusporcolor[i] = numviruscolores[i];
+
+            
         }
 
-        this.numvirus = numvirusblue + numvirusred + numvirusyellow;*/
+        this.numvirus = numvirusblue + numvirusred + numvirusyellow;
     }
 
-    actualizarpuntaje(){
-        if(this.numvirusini > this.numvirus){
+    actualizarpuntaje() {
+        this.verificarnumvirus();
+        if (this.numvirusini != this.numvirus) {
             let viruseliminados = this.numvirusini - this.numvirus;
-            switch(viruseliminados){
+            switch (viruseliminados) {
                 case 0:
                     break;
                 case 1:
@@ -303,6 +361,9 @@ class Tablero {
                     this.puntuacion += 3200 * this.nivel;
                     break;
             }
+            print(this.puntuacion);
+
+            this.numvirusini = this.numvirus;
 
         }
     }
@@ -330,7 +391,6 @@ class Tablero {
 
             if (pastillasconsecutivasX >= 4) {
                 for (let z = 0; z < pastillasconsecutivasX; z++) {
-                    if (this.casillas[i][z][0] == 'virus') { this.numvirus -= 1; }
                     this.casillas[i].splice(deletioncoordinateX + z, 1, ['deleted', 'none', '#ffffff', false]);
                 }
             }
@@ -359,7 +419,6 @@ class Tablero {
 
             if (pastillasconsecutivasY >= 4) {
                 for (let z = 0; z < pastillasconsecutivasY; z++) {
-                    if (this.casillas[z][j][0] == 'virus') { this.numvirus -= 1; }
                     this.casillas[deletioncoordinateY + z].splice(j, 1, ['blank', 'none', '#ffffff', false]);
                 }
             }
@@ -392,19 +451,19 @@ class Tablero {
                             }
                             break;
                         case 'd':
-                            if(this.casillas[i][j - 1][0] == 'blank'){
+                            if (this.casillas[i][j - 1][0] == 'blank') {
 
                                 this.casillas[i][j].splice(3, 1, true);
                             }
                             break;
                         case 'ar':
-                            if(this.casillas[i + 1][j][0] == 'blank'){
+                            if (this.casillas[i + 1][j][0] == 'blank') {
 
                                 this.casillas[i][j].splice(3, 1, true);
                             }
                             break;
                         case 'ab':
-                            if(this.casillas[i - 1][j][0] == 'blank'){
+                            if (this.casillas[i - 1][j][0] == 'blank') {
 
                                 this.casillas[i][j].splice(3, 1, true);
                             }
@@ -415,7 +474,7 @@ class Tablero {
         }
     }
 
-    bajarpildorasrotas(){
+    bajarpildorasrotas() {
         for (let i = this.casillas.length - 2; i >= 0; i--) {
             for (let j = 0; j < this.casillas[0].length; j++) {
                 if (this.casillas[i][j][3] == true & this.casillas[i + 1][j][0] == 'blank') {
@@ -423,7 +482,7 @@ class Tablero {
                     this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
                 } else if (this.casillas[i][j][3] == false & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
                     let willfall = false;
-                    switch(this.casillas[i][j][4]){
+                    switch (this.casillas[i][j][4]) {
                         default:
                             break;
                         case 'i':
@@ -432,24 +491,24 @@ class Tablero {
                             }
                             break;
                         case 'd':
-                            if(this.casillas[i + 1][j - 1][0] == 'blank' | this.casillas[i][j - 1][0] == 'blank1'){
+                            if (this.casillas[i + 1][j - 1][0] == 'blank' | this.casillas[i][j - 1][0] == 'blank1') {
                                 willfall = true;
                             }
                             break;
                         case 'ar':
-                            if(this.casillas[i + 2][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1'){
+                            if (this.casillas[i + 2][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1') {
                                 willfall = true;
                             }
                             break;
                         case 'ab':
-                            if(this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1'){
+                            if (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1') {
                                 willfall = true;
                             }
                             break;
                     }
-                    if(willfall){
+                    if (willfall) {
                         this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
-                        this.casillas[i].splice(j, 1, ['blank1', 'blanco', '#000000', false]); 
+                        this.casillas[i].splice(j, 1, ['blank1', 'blanco', '#000000', false]);
                     }
                 }
             }
