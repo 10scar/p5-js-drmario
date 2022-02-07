@@ -5,11 +5,12 @@ class Tablero {
         this.background = [32, 30];
         this.posicion = [posx, posy];
 
-        this.speed = 1;
+        this.speed = 32;
         this.virus = [1, 1, 1];
-        this.estado = 5;
+        this.estado = 0;
         this.volumen = 0.3;
         this.puntuacion = 0;
+        this.top = 0;
         this.contadorparaanimaciones = 0;
 
         this.nivel = 1;
@@ -143,6 +144,7 @@ class Tablero {
 
     puntuacion_jugador(posicion_score, posicion_nivel) {
         ///cuadro de score y top
+        let speed;
         stroke(0);
         fill('#f7be39');
         rect(posicion_score[0] * this.escala, posicion_score[1] * this.escala, 9 * this.escala, 9 * this.escala, 10);
@@ -151,20 +153,30 @@ class Tablero {
         fill(0);
         textSize(0.9 * this.escala);
         textStyle(NORMAL);
-        text('TOP\n\n' + this.puntuacion, (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        noStroke();
+        text('TOP\n\n' + this.top, (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
         text('SCORE\n\n' + this.puntuacion, (posicion_score[0] + 0.8) * this.escala, (posicion_score[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
 
         ///cuadro nivel, speed, virus
         fill('#f7be39');
+        stroke(0);
         rect(posicion_nivel[0] * this.escala, posicion_nivel[1] * this.escala, 8 * this.escala, 12 * this.escala, 10);
         fill('#c6d7ff');
         rect((posicion_nivel[0] + 0.5) * this.escala, (posicion_nivel[1] + 0.5) * this.escala, 7 * this.escala, 11 * this.escala, 10);
         fill(0);
+        noStroke();
         textSize(0.9 * this.escala);
         textStyle(NORMAL);
-        text('LEVEL' + '\n\n10', (posicion_nivel[0] + 0.8) * this.escala, (posicion_nivel[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
-        text('SPEED' + '\n\nMED', (posicion_nivel[0] + 0.8) * this.escala, (posicion_nivel[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
-        text('VIRUS' + '\n\n36', (posicion_nivel[0] + 0.8) * this.escala, (posicion_nivel[1] + 8.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        if(tablero.speed == 32){
+            speed = 'LOW';
+        }else if (tablero.speed == 16){
+            speed = 'MED';
+        }else if (tablero.speed == 10){
+            speed = 'HIGH';
+        }
+        text('LEVEL' + '\n\n'+tablero.nivel, (posicion_nivel[0] + 1.4) * this.escala, (posicion_nivel[1] + 1.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('SPEED' + '\n\n'+speed, (posicion_nivel[0] + 1.4) * this.escala, (posicion_nivel[1] + 5) * this.escala, 8 * this.escala, 7.5 * this.escala);
+        text('VIRUS' + '\n\n'+tablero.numvirus, (posicion_nivel[0] + 1.4) * this.escala, (posicion_nivel[1] + 8.5) * this.escala, 8 * this.escala, 7.5 * this.escala);
     }
 
     animacion_mario(posicion, estado) {

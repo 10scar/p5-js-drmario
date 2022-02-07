@@ -6,7 +6,8 @@ const colores = [
 fisicas ={
   't' : 0, //Se inicia el tiempo a t = 0
   'g' : 9.8, //Aceleración de gravedad
-  'rot':0
+  'rot':0,
+  'animacion':false
 }
 ///en construccion.
 class Ficha {

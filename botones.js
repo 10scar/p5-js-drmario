@@ -20,6 +20,7 @@ function botones_menu(){
     menu_low.stroke  = '#ce4d08';
     menu_med.stroke  = '#000000';
     menu_hi.stroke  = '#000000';
+    tablero.speed =32;
   
   }
   //////
@@ -42,6 +43,7 @@ function botones_menu(){
     menu_med.stroke  = '#ce4d08';
     menu_low.stroke  = '#000000';
     menu_hi.stroke  = '#000000';
+    tablero.speed =16;
   
   }
 
@@ -67,6 +69,7 @@ function botones_menu(){
     menu_hi.stroke  = '#ce4d08';
     menu_low.stroke  = '#000000';
     menu_med.stroke  = '#000000';
+    tablero.speed =10;
   
   }
 
@@ -172,6 +175,34 @@ function keyPressed() {
     case 67:
       print('happening');
       tablero.bajarpildorasrotas();
+      break;
+
+    case 13:
+      if(tablero.estado == 0){
+        tablero.estado = 4;
+      }else if(tablero.estado ==4){
+        tablero.estado = 5;
+      }else if(tablero.estado==1){
+        tablero.estado = 2;
+      }else if(tablero.estado==2){
+        if(fisicas['animacion']){
+          tablero.estado = 5;
+          fisicas['animacion'] = false;
+        }else{
+          tablero.estado = 1;
+        }
+        
+      }else if(tablero.estado==5){
+        tablero.estado = 2;
+        fisicas['animacion'] = true;
+      }else if(tablero.estado==6){
+        tablero.estado = 1;
+        tablero.score=0;
+        tablero.restablecer;
+        tablero.virus= [1, 1, 1];
+        tablero.nivel +=1;
+      }
+      
       break;
   }
 

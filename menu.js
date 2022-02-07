@@ -18,7 +18,7 @@ function menu(){
         textSize(1*tablero.escala);
         fill('#ffffff');
         noStroke();
-        text(tablero.nivel, 23.5*tablero.escala, 11.5* tablero.escala,2*tablero.escala, 2*tablero.escala);
+        text(tablero.nivel, 23.7*tablero.escala, 11.5* tablero.escala,2*tablero.escala, 2*tablero.escala);
 
     stroke('#bf732b');
     textSize(1.2*tablero.escala);
@@ -35,7 +35,6 @@ function menu(){
     menu_chill.draw();
     menu_off.draw();
     // jugar boton
-
   
 }
 function sliders_custom(x,y,nivel,max){

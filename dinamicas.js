@@ -2,7 +2,6 @@
 function dinamicas() {
   //config.draw();
   //casos de juego, 0,iniciar tuttorial, 1 juego, 2 pausa, 3 game over
-  console.log(figura.rotacion);
   switch (tablero.estado) {
     case 0:
       inicio();
@@ -27,11 +26,35 @@ function dinamicas() {
       animacion_lanzar();
       break;
 
+    case 6:
+      siguiente_nivel();
+      break;
+
     default:
       break;
   }
 
 
+}
+
+function siguiente_nivel(){
+  tablero.virus= [2, 2, 2];
+  tablero.background_draw('#44049c', '#040404');
+  tablero.dibujar_marco(12, 5, 10, 22);
+  tablero.dibujar();
+  
+
+
+  //elementos del talbero
+  tablero.lupa_virus([6, 21], [[4, 16.5], [6, 19.5], [1.5, 19.5]]);
+  tablero.puntuacion_jugador([0, 4], [23, 16]);
+  tablero.animacion_mario([23, 8], 0);
+  figura.siguiente();
+  tablero.restablecer();
+  fill('#FFFFFF');
+  text("WON ", 15.5 * tablero.escala, 13 * tablero.escala);
+  textSize(1 * tablero.escala + ((second() % 2) * 0.05 * tablero.escala));
+  text("PRESS\nSTART", 14.5 * tablero.escala, 16 * tablero.escala);
 }
 
 function game_over() {
@@ -52,12 +75,11 @@ function game_over() {
 }
 
 function espera() {
-  muscia_juego.setVolume(tablero.volumen);
-  intro.setVolume(tablero.volumen);
-  boton_pausa.draw();
-  //informacion del jugador
-  tablero.informacion();
-  text("PAUSA", 15 * tablero.escala, 9 * tablero.escala);
+/*   muscia_juego.setVolume(tablero.volumen);
+  intro.setVolume(tablero.volumen); */
+  tablero.background_draw('#000000', '#000000');
+  fill('#FFFFFF');
+  text("PAUSA", 15 * tablero.escala, 15 * tablero.escala);
 }
 
 function juego() {
@@ -91,10 +113,18 @@ function juego() {
   tablero.verificar_lineas();
   tablero.actualizarpuntaje();
   gravedad();
+  if(tablero.virus==0){
+    tablero.restablecer;
+    tablero.estado = 6;
+    if(tablero.score > tablero.top){
+      tablero.top = tablero.score;
+    }
+    
+  }
 }
 
 function gravedad() {
-  if (frameCount % 32 == 0) {
+  if (frameCount % tablero.speed == 0) {
     figura.mover(0, 1);
   }
   if (frameCount % 4 == 0) {
@@ -157,7 +187,7 @@ function animacion_lanzar(){
   //elementos del talbero
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
   tablero.puntuacion_jugador([0, 4], [23, 16]);
-  tablero.animacion_mario([23, 8], 0);
+  tablero.animacion_mario([23, 8], 1);
   figura.lanzar();
 
   gravedad();
