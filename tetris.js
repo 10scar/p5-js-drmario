@@ -112,7 +112,7 @@ class Ficha {
 
     for (let i = 0; i < this.forma[nextrotation].length; i++) {
       for (let j = this.forma[nextrotation][i].length - 1; j >= 0; j--) {
-        if (this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank') {
+        if (this.forma[nextrotation][i][j] != 'blank' && (tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank' & tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank1')) {
           return false;
         }
       }
@@ -120,7 +120,7 @@ class Ficha {
 
     for (let i = 0; i < this.forma[nextrotation].length; i++) {
       for (let j = 0; j < this.forma[nextrotation][i].length; j++) {
-        if ((this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank')) {
+        if (this.forma[nextrotation][i][j] != 'blank' && (tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank' & tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank1')) {
           return false;
         }
       }
@@ -128,7 +128,7 @@ class Ficha {
 
     for (let i = this.forma[nextrotation].length - 1; i >= 0; i--) {
       for (let j = 0; j < this.forma[nextrotation][i].length; j++) {
-        if ((this.forma[nextrotation][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank')) {
+        if (this.forma[nextrotation][i][j] != 'blank' && (tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank' & tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + j - tablero.posicion[0]][0] != 'blank1')) {
           return false;
         }
       }
@@ -146,7 +146,7 @@ class Ficha {
           for (let j = 0; j < this.forma[this.rotacion][i].length; j++) {
             if ((this.relposX - tablero.posicion[0] == 0)) {
               return false;
-            } else if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + x - tablero.posicion[0]][0] != 'blank') {
+            } else if (this.forma[this.rotacion][i][j] != 'blank' && (tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + x - tablero.posicion[0]][0] != 'blank' & tablero.casillas[this.relposY + i - tablero.posicion[1]][this.relposX + x - tablero.posicion[0]][0] != 'blank1')) {
               return false;
             }
           }
@@ -157,7 +157,7 @@ class Ficha {
             if (this.relposX - tablero.posicion[0] + j + 1 == tablero.casillas[0].length) {
               return false;
             }
-            if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[(this.relposY - tablero.posicion[1]) + i][this.relposX - tablero.posicion[0] + j + 1][0] != 'blank') {
+            if (this.forma[this.rotacion][i][j] != 'blank' && (tablero.casillas[(this.relposY - tablero.posicion[1]) + i][this.relposX - tablero.posicion[0] + j + 1][0] != 'blank' & tablero.casillas[(this.relposY - tablero.posicion[1]) + i][this.relposX - tablero.posicion[0] + j + 1][0] != 'blank1')) {
               return false;
             }
           }
@@ -169,7 +169,7 @@ class Ficha {
           if ((this.relposY - tablero.posicion[1]) + i + 1 == tablero.casillas.length) {
             return false;
           }
-          if (this.forma[this.rotacion][i][j] != 'blank' && tablero.casillas[this.relposY - tablero.posicion[1] + i + 1][this.relposX + j - tablero.posicion[0]][0] != 'blank') {
+          if (this.forma[this.rotacion][i][j] != 'blank' && (tablero.casillas[this.relposY - tablero.posicion[1] + i + 1][this.relposX + j - tablero.posicion[0]][0] != 'blank' & tablero.casillas[this.relposY - tablero.posicion[1] + i + 1][this.relposX + j - tablero.posicion[0]][0] != 'blank1')) {
             return false;
           }
         }
@@ -206,12 +206,13 @@ class Ficha {
       this.vida = 1;
       this.relposX = 16;
       this.relposY = 10;
+      this.rotacion = 0;
 
       this.x = this.relposX * this.escala;
       this.y = this.relposY * this.escala;
 
-      this.color1 = random(colores);
-      this.color2 = random(colores);
+      //this.color1 = random(colores);
+      //this.color2 = random(colores);
 
       this.forma = [
         [[this.color1, this.color2]],

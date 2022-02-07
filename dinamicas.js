@@ -72,6 +72,7 @@ function juego() {
   //se verifica que no se pueda mover la figura hacia abajo
   if (frameCount % (32 + 1) == 0) {
     tablero.eliminarpildoras();
+    tablero.romperpildoras();
   }
   if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
     if (!tablero.actualizaroterminar()) {
@@ -85,10 +86,9 @@ function juego() {
 
   }
 
-  gravedad();
-  tablero.verificar_lineas();
-  tablero.romperpildoras();
 
+  tablero.verificar_lineas();
+  gravedad();
 }
 
 function gravedad() {

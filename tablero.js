@@ -44,6 +44,7 @@ class Tablero {
                         image(tablero_sprites['virus_' + this.casillas[i][x][1]], (this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala, this.escala);
                         break;
                     case 'blank':
+                    case 'blank1':
                         fill(0);
                         rect((this.escala * x) + this.escala * this.posicion[0], (this.escala * i) + this.escala * this.posicion[1], this.escala);
                         break;
@@ -268,13 +269,13 @@ class Tablero {
             }
         }
 
-        for(let i = 0; i < numviruscolores.length; i++){
+        /*for(let i = 0; i < numviruscolores.length; i++){
             if(numviruscolores[i] == 0){
                 this.virus.splice(i, 1, 0);
             }
         }
 
-        this.numvirus = numvirusblue + numvirusred + numvirusyellow;
+        this.numvirus = numvirusblue + numvirusred + numvirusyellow;*/
     }
 
     actualizarpuntaje(){
@@ -311,7 +312,7 @@ class Tablero {
             let pastillasconsecutivasX = 1;
             let deletioncoordinateX;
             for (let j = 0; j < this.casillas[0].length - 1; j++) {
-                if ((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][1] == this.casillas[i][j + 1][1])) {
+                if ((this.casillas[i][j][0] != 'blank' & this.casillas[i][j][0] != 'blank1') & (this.casillas[i][j][1] == this.casillas[i][j + 1][1])) {
                     pastillasconsecutivasX += 1;
                     if (pastillasconsecutivasX == 2) {
                         deletioncoordinateX = j;
@@ -340,7 +341,7 @@ class Tablero {
             let deletioncoordinateY;
             for (let i = 0; i < this.casillas.length - 1; i++) {
 
-                if ((this.casillas[i][j][0] != 'blank') & (this.casillas[i][j][1] == this.casillas[i + 1][j][1])) {
+                if ((this.casillas[i][j][0] != 'blank' & this.casillas[i][j][0] != 'blank1') & (this.casillas[i][j][1] == this.casillas[i + 1][j][1])) {
                     pastillasconsecutivasY += 1;
                     if (pastillasconsecutivasY == 2) {
                         deletioncoordinateY = i;
@@ -420,35 +421,35 @@ class Tablero {
                 if (this.casillas[i][j][3] == true & this.casillas[i + 1][j][0] == 'blank') {
                     this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
                     this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
-                } else if (this.casillas[i][j][3] == false & this.casillas[i + 1][j][0] == 'blank') {
+                } else if (this.casillas[i][j][3] == false & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
                     let willfall = false;
                     switch(this.casillas[i][j][4]){
                         default:
                             break;
                         case 'i':
-                            if (this.casillas[i + 1][j + 1][0] == 'blank') {
+                            if (this.casillas[i + 1][j + 1][0] == 'blank' | this.casillas[i + 1][j + 1][0] == 'blank1') {
                                 willfall = true;
                             }
                             break;
                         case 'd':
-                            if(this.casillas[i + 1][j - 1][0] == 'blank'){
+                            if(this.casillas[i + 1][j - 1][0] == 'blank' | this.casillas[i][j - 1][0] == 'blank1'){
                                 willfall = true;
                             }
                             break;
                         case 'ar':
-                            if(this.casillas[i + 2][j][0] == 'blank'){
+                            if(this.casillas[i + 2][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1'){
                                 willfall = true;
                             }
                             break;
                         case 'ab':
-                            if(this.casillas[i + 1][j][0] == 'blank'){
+                            if(this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1'){
                                 willfall = true;
                             }
                             break;
                     }
                     if(willfall){
                         this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
-                        this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]); 
+                        this.casillas[i].splice(j, 1, ['blank1', 'blanco', '#000000', false]); 
                     }
                 }
             }
