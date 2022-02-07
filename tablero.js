@@ -477,7 +477,7 @@ class Tablero {
     bajarpildorasrotas() {
         for (let i = this.casillas.length - 2; i >= 0; i--) {
             for (let j = 0; j < this.casillas[0].length; j++) {
-                if (this.casillas[i][j][3] == true & this.casillas[i + 1][j][0] == 'blank') {
+                if (this.casillas[i][j][3] == true & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
                     this.casillas[i + 1].splice(j, 1, this.casillas[i][j]);
                     this.casillas[i].splice(j, 1, ['blank', 'blanco', '#000000', false]);
                 } else if (this.casillas[i][j][3] == false & (this.casillas[i + 1][j][0] == 'blank' | this.casillas[i + 1][j][0] == 'blank1')) {
