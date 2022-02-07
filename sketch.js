@@ -1,4 +1,4 @@
-let intro;
+
 let control_musica;
 let tamaño = {
   width: 0,
@@ -8,7 +8,8 @@ let tamaño = {
 
 //varables de imagenes
 let mario_esperando,mario_pildora_1,mario_pildora_2,margen, virus_azul_caminado;
-
+//musica
+let intro, muscia_2;
 //variable para la fuente
 let fuente;
 

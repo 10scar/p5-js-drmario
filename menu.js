@@ -1,4 +1,19 @@
 function menu(){
+     //verifica musica
+  if(fisicas['musica']==0){
+    musica_2.stop(0);
+    intro.setVolume(tablero.volumen);
+    if(!intro.isPlaying())
+    {
+    intro.play();
+    }
+  }else{
+    intro.stop(0);
+    musica_2.setVolume(tablero.volumen);
+    if(!musica_2.isPlaying()){
+     musica_2.play();
+  }
+  }
     textFont(fuente);
     tablero.background_draw('#ff9a39', '#e7005a');
     fill(0);

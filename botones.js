@@ -93,6 +93,8 @@ function botones_menu(){
     menu_fever.stroke  = '#ce4d08';
     menu_chill.stroke  = '#000000';
     menu_off.stroke  = '#000000';
+    fisicas['musica'] =0;
+    tablero.volumen =0.3;
   
   }
   //////
@@ -115,6 +117,8 @@ function botones_menu(){
     menu_chill.stroke  = '#ce4d08';
     menu_fever.stroke  = '#000000';
     menu_off.stroke  = '#000000';
+    fisicas['musica'] =1;
+    tablero.volumen =0.3;
   
   }
 
@@ -140,6 +144,7 @@ function botones_menu(){
     menu_off.stroke  = '#ce4d08';
     menu_fever.stroke  = '#000000';
     menu_chill.stroke  = '#000000';
+    tablero.volumen =0;
   
   }
 

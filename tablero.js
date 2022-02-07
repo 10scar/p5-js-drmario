@@ -7,7 +7,7 @@ class Tablero {
 
         this.speed = 32;
         this.virus = [1, 1, 1];
-        this.estado = 3;
+        this.estado = 0;
         this.volumen = 0.3;
         this.puntuacion = 0;
         this.top = 0;

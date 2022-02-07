@@ -60,12 +60,12 @@ function siguiente_nivel(){
 
 function game_over() {
 
-  //verifica musica
-  /*intro.setVolume(tablero.volumen);
-  if (!intro.isPlaying()) {
+   //verifica musica
+   intro.setVolume(tablero.volumen);
+   if(!intro.isPlaying()){
     intro.play();
-
-  }*/
+     
+   } 
   tablero.virus= [3, 3, 3];
   tablero.background_draw('#44049c', '#040404');
   tablero.dibujar_marco(12, 5, 10, 22);
@@ -88,8 +88,21 @@ function game_over() {
 }
 
 function espera() {
-/*   muscia_juego.setVolume(tablero.volumen);
-  intro.setVolume(tablero.volumen); */
+     //verifica musica
+     if(fisicas['musica']==0){
+      musica_2.stop(0);
+      intro.setVolume(tablero.volumen);
+      if(!intro.isPlaying())
+      {
+      intro.play();
+      }
+    }else{
+      intro.stop(0);
+      musica_2.setVolume(tablero.volumen);
+      if(!musica_2.isPlaying()){
+       musica_2.play();
+    }
+    }
   tablero.background_draw('#000000', '#000000');
   fill('#FFFFFF');
   text("PAUSA", 15 * tablero.escala, 15 * tablero.escala);
@@ -97,6 +110,21 @@ function espera() {
 
 function juego() {
 
+       //verifica musica
+       if(fisicas['musica']==0){
+        musica_2.stop(0);
+        intro.setVolume(tablero.volumen);
+        if(!intro.isPlaying())
+        {
+        intro.play();
+        }
+      }else{
+        intro.stop(0);
+        musica_2.setVolume(tablero.volumen);
+        if(!musica_2.isPlaying()){
+         musica_2.play();
+      }
+      }
   tablero.background_draw('#44049c', '#040404');
   tablero.dibujar_marco(12, 5, 10, 22);
   tablero.dibujar();
@@ -180,11 +208,11 @@ function inicio() {
   textAlign(CENTER);
   text('PRESS ENTER', 10 * tablero.escala, 23 * tablero.escala, 15 * tablero.escala, 2 * tablero.escala);
   //verifica musica
-  /*     intro.setVolume(tablero.volumen);
+      intro.setVolume(tablero.volumen);
       if(!intro.isPlaying()){
        intro.play();
         
-      } */
+      } 
 
 }
 
@@ -221,6 +249,8 @@ function preload() {
   mario_pildora_1 = loadImage('img/mario/mario_3.png');
   mario_pildora_2 = loadImage('img/mario/mario_4.png');
   margen = loadImage('img/margen.png');
+  intro = loadSound('sound/intro.wav');
+  musica_2 =loadSound('sound/musica_2.wav');
 
 
 

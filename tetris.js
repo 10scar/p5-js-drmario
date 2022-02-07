@@ -7,7 +7,8 @@ fisicas ={
   't' : 0, //Se inicia el tiempo a t = 0
   'g' : 9.8, //Aceleración de gravedad
   'rot':0,
-  'animacion':false
+  'animacion':false,
+  'musica':0,
 }
 ///en construccion.
 class Ficha {
