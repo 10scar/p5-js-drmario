@@ -217,6 +217,12 @@ class Ficha {
 
       //this.color1 = random(colores);
       //this.color2 = random(colores);
+      this.color1 = this.nextcolor1;
+      this.color2 = this.nextcolor2;
+  
+      this.nextcolor1 = random(colores);
+      this.nextcolor2 = random(colores);
+      this.rotacion = 0;
 
       this.forma = [
         [[this.color1, this.color2]],
@@ -241,6 +247,7 @@ class Ficha {
   }
   lanzar(){
     let x,y;
+    let op_rot = true;
     //itera en la matriz en .forma y dependiendo del valor en cada índice dibuja un cuadrado
     x =  (this.escala*25) +60 * cos(105) * fisicas['t']; 
     y =  (this.escala*21) +60  * sin(105) * fisicas['t'] - 0.5 * fisicas['g'] * fisicas['t'] * fisicas['t']; 
@@ -263,6 +270,7 @@ class Ficha {
             fisicas['t'] = 0;
             this.rotacion = 0;
             tablero.estado = 1;
+            op_rot= false;
           }
           image(tablero_sprites['pildora_'+this.forma[this.rotacion][i][j][0]+'_'+count],0,0, this.escala,this.escala);
           pop();
@@ -270,7 +278,10 @@ class Ficha {
         }
       }
     }
-    this.rotacion=(second()%2);
+    if(op_rot){
+      this.rotacion=(second()%2);
+    }
+    
     
   }
   siguiente(){
