@@ -46,15 +46,16 @@ function siguiente_nivel(){
 
 
   //elementos del talbero
-  tablero.lupa_virus([6, 21], [[4, 16.5], [6, 19.5], [1.5, 19.5]]);
+  tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
   tablero.puntuacion_jugador([0, 4], [23, 16]);
   tablero.animacion_mario([23, 8], 0);
   figura.siguiente();
   tablero.restablecer();
   fill('#FFFFFF');
-  text("WON ", 15.5 * tablero.escala, 13 * tablero.escala);
+  textAlign(CENTER);
+  text("WON ", 17 * tablero.escala, 13 * tablero.escala);
   textSize(1 * tablero.escala + ((second() % 2) * 0.05 * tablero.escala));
-  text("PRESS\nSTART", 14.5 * tablero.escala, 16 * tablero.escala);
+  text("PRESS\nSTART", 17 * tablero.escala, 16 * tablero.escala);
 }
 
 function game_over() {
@@ -65,13 +66,25 @@ function game_over() {
     intro.play();
 
   }*/
+  tablero.virus= [3, 3, 3];
+  tablero.background_draw('#44049c', '#040404');
+  tablero.dibujar_marco(12, 5, 10, 22);
+  tablero.dibujar();
+  
 
-  //tablero.informacion();
-  fill(0, 200, 0);
-  textSize(1.5 * tablero.escala);
-  //jugar.locate(2 * tablero.escala, 1 * tablero.escala);
-  //jugar.draw();
-  text("GAME OVER", 1.5 * tablero.escala, 12 * tablero.escala);
+
+  //elementos del talbero
+  tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
+  tablero.puntuacion_jugador([0, 4], [23, 16]);
+  tablero.animacion_mario([23, 8], 0);
+  figura.siguiente();
+  tablero.restablecer();
+  fill('#FFFFFF');
+  textFont(fuente);
+  textAlign(CENTER);
+  text("GAME OVER", 17 * tablero.escala, 13 * tablero.escala);
+  textSize(1 * tablero.escala + ((second() % 2) * 0.05 * tablero.escala));
+  text("PRESS\nSTART", 17 * tablero.escala, 16 * tablero.escala);
 }
 
 function espera() {

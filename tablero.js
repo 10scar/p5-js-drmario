@@ -7,7 +7,7 @@ class Tablero {
 
         this.speed = 32;
         this.virus = [1, 1, 1];
-        this.estado = 0;
+        this.estado = 3;
         this.volumen = 0.3;
         this.puntuacion = 0;
         this.top = 0;
@@ -227,7 +227,7 @@ class Tablero {
                     image(virus_sprites[i * 3], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 3.5 * tablero.escala, 3.5 * tablero.escala);
                     break;
                 case 2:
-                    image(virus_sprites[(i * 3) + 1], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
+                    image(virus_sprites[(i * 3) + 1], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 3.5 * tablero.escala, 3.5* tablero.escala);
                     this.contadorparaanimaciones++;
                     if (this.contadorparaanimaciones == 30) {
                         this.contadorparaanimaciones = 0;
@@ -235,7 +235,7 @@ class Tablero {
                     }
                     break;
                 case 3:
-                    image(virus_sprites[(i * 3) + 2], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala, 4.5 * tablero.escala, 5 * tablero.escala);
+                    image(virus_sprites[(i * 3) + 2], virus_pos[i][0] * tablero.escala, virus_pos[i][1] * tablero.escala,3.5 * tablero.escala, 3.5 * tablero.escala);
                     break;
 
                 default:

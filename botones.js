@@ -201,6 +201,13 @@ function keyPressed() {
         tablero.restablecer;
         tablero.virus= [1, 1, 1];
         tablero.nivel +=1;
+      }else if(tablero.estado==3){
+        tablero.estado = 4;
+        tablero.score=0;
+        tablero.speed = 32;
+        tablero.restablecer;
+        tablero.virus= [1, 1, 1];
+        tablero.nivel =1;
       }
       
       break;
