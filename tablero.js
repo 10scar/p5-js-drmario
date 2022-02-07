@@ -105,12 +105,6 @@ class Tablero {
         return arr
     }
 
-    condicionganar() {
-        if (this.numvirus == 0) {
-            return true;
-        }
-    }
-
     actualizaroterminar() {
         if (figura.relposY - this.posicion[1] <= 0) {
             console.log('Perdida');
@@ -540,6 +534,7 @@ class Tablero {
     restablecer(nivel = 1) {
         this.nivel = nivel;
         this.puntuacion = 0;
+        this.numvirusini = (this.nivel - 1) * 4 + 4;
 
         this.casillas = this.array2d(this.casillas.length, this.casillas[0].length, ['blank', 'blanco', '#000000', 'none']);
         this.generarVirus();

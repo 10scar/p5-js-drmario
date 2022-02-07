@@ -97,11 +97,6 @@ function juego() {
   tablero.animacion_mario([23, 8], 0);
   figura.siguiente();
 
-  if(tablero.condicionganar()){
-    print(true);
-    tablero.estado = 3;
-  }
-
   //se verifica que no se pueda mover la figura hacia abajo
   if (!figura.tryMove(0, 1) & frameCount % (32 + 5) == 0) {
     if (!tablero.actualizaroterminar()) {
@@ -280,7 +275,7 @@ function mouseClicked() {
     case 4:
       if(mouseX <=20*tablero.escala  && mouseX >=7.9*tablero.escala &&mouseY >=11*tablero.escala && mouseY <=13*tablero.escala ){
         let nivel = (mouseX -8*tablero.escala)/(tablero.escala*0.6);
-        tablero.nivel = Math.round(nivel+1);
+        tablero.restablecer(Math.round(nivel+1));
         //alert(nivel);
     }
       break;
