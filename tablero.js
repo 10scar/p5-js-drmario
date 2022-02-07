@@ -1,16 +1,21 @@
 class Tablero {
     constructor(escala = 100, dimy = 16, dimx = 8, posx = 13, posy = 10) {
         this.escala = escala;
-        this.frames = 0;
+
         this.background = [32, 30];
         this.posicion = [posx, posy];
+
+        this.speed = 1;
         this.virus = [1, 1, 1];
         this.estado = 1;
         this.volumen = 0.3;
+        this.puntuacion = 0;
+
         this.nivel = 1;
-        this.lineas = 0;
         this.numvirusini = (this.nivel - 1) * 4 + 4;
         this.numvirus = this.numvirusini;
+        
+           
         //organización casillas: [tipo, color, relleno, aqui irán las condiciones de estar roto, probablemente un array o algo]
         this.casillas = this.array2d(dimy, dimx, ['blank', 'blanco', 0, false]);
         this.generarVirus();
@@ -220,6 +225,65 @@ class Tablero {
         }
     }
 
+    verificarnumvirus(){
+        let numvirusred = 0;
+        let numvirusyellow = 0;
+        let numvirusblue = 0;
+
+        let numviruscolores = [numvirusyellow, numvirusblue, numvirusred];
+
+        for (let i = 0; i < this.casillas.length; i++) {
+            for (let j = 0; j < this.casillas[0].length - 1; j++) {
+                if(this.virus[0] == 1){
+                    numvirusyellow += 1;
+                }
+                if(this.virus[1] == 1){
+                    numvirusblue += 1;
+                }
+                if(this.numvirus[2] == 1){
+                    numvirusred += 1;
+                }
+            }
+        }
+
+        for(let i = 0; i < numviruscolores.length; i++){
+            if(numviruscolores[i] == 0){
+                this.virus.splice(i, 1, 0);
+            }
+        }
+
+        this.numvirus = numvirusblue + numvirusred + numvirusyellow;
+    }
+
+    actualizarpuntaje(){
+        if(this.numvirusini > this.numvirus){
+            let viruseliminados = this.numvirusini - this.numvirus;
+            switch(viruseliminados){
+                case 0:
+                    break;
+                case 1:
+                    this.puntuacion += 100 * this.nivel;
+                    break;
+                case 2:
+                    this.puntuacion += 200 * this.nivel;
+                    break;
+                case 3:
+                    this.puntuacion += 400 * this.nivel;
+                    break;
+                case 4:
+                    this.puntuacion += 800 * this.nivel;
+                    break;
+                case 5:
+                    this.puntuacion += 1600 * this.nivel;
+                    break;
+                default:
+                    this.puntuacion += 3200 * this.nivel;
+                    break;
+            }
+
+        }
+    }
+
     verificar_lineas() {
         for (let i = 0; i < this.casillas.length; i++) {
             let pastillasconsecutivasX = 1;
@@ -348,13 +412,12 @@ class Tablero {
         textSize(1 * this.escala);
         text("Nivel :" + this.nivel, 13 * this.escala, 4 * this.escala);
         text("Puntuación :" /*+ jugador.puntuacion*/, 13 * this.escala, 5 * this.escala);
-        text("Lineas :" + this.lineas, 13 * this.escala, 7 * this.escala);
+        //text("Lineas :" + this.lineas, 13 * this.escala, 7 * this.escala);
     }
 
-    restablecer() {
-        this.nivel = 1;
+    restablecer(nivel = 1) {
+        this.nivel = nivel;
         this.puntuacion = 0;
-        this.lineas = 0;
 
         this.casillas = this.array2d(this.casillas.length, this.casillas[0].length, ['blank', 'blanco', '#000000', 'none']);
         this.generarVirus();
