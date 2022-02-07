@@ -43,7 +43,13 @@ function siguiente_nivel(){
   tablero.dibujar_marco(12, 5, 10, 22);
   tablero.dibujar();
   
-
+    //verifica musica
+    musica_2.stop(0);
+    intro.setVolume(tablero.volumen);
+    if(!intro.isPlaying()){
+     intro.play();
+      
+    } 
 
   //elementos del talbero
   tablero.lupa_virus([6, 21], [[4.5, 17], [6.5, 20], [2, 20]]);
@@ -220,6 +226,21 @@ function inicio() {
 
 
 function animacion_lanzar(){
+       //verifica musica
+       if(fisicas['musica']==0){
+        musica_2.stop(0);
+        intro.setVolume(tablero.volumen);
+        if(!intro.isPlaying())
+        {
+        intro.play();
+        }
+      }else{
+        intro.stop(0);
+        musica_2.setVolume(tablero.volumen);
+        if(!musica_2.isPlaying()){
+         musica_2.play();
+      }
+      }
 
   tablero.background_draw('#44049c', '#040404');
   tablero.dibujar_marco(12, 5, 10, 22);
